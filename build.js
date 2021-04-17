@@ -1,5 +1,4 @@
-
-function InitialiseGeometry(){
+function InitialiseGeometry() {
     var box_geometry = new THREE.BoxGeometry(5, 5, 5);
     var cubeMaterial = new THREE.MeshPhongMaterial();
 
@@ -64,8 +63,8 @@ function InitialiseGeometry(){
     var resolution = 256;
     var deltaTheta = (2 * Math.PI) / resolution;
     var theta = 0;
-    for(let radius = 1; radius < 50; radius += 5){
-        for(let i = 0; i < resolution; ++i){
+    for (let radius = 1; radius < 50; radius += 5) {
+        for (let i = 0; i < resolution; ++i) {
             var c = new THREE.Mesh(box, cubeMaterial);
 
             c.position.x = radius * Math.cos(theta);
@@ -74,7 +73,7 @@ function InitialiseGeometry(){
 
             theta += deltaTheta;
 
-	        c.name = 'clickable';
+            c.name = 'clickable';
 
             box.computeBoundingBox();
             //box.computeVertexNormals();

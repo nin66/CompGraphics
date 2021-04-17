@@ -1,10 +1,10 @@
-
-
 var scene;
 var camera;
+var controls;
 var renderer;
 var day_light;
 var ambient_light;
+
 
 var clock = new THREE.Clock();
 var deltaTime;
