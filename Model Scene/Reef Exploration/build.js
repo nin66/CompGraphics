@@ -3,6 +3,8 @@
 var GLTFLoader = new THREE.GLTFLoader();
 // let mixer;
 let mixer = [];
+let meshes = [];
+let skinned = [];
 
 function loadGLTF(url, x, y, z) {
     x = x || 0;     //  Default positions.
@@ -16,11 +18,12 @@ function loadGLTF(url, x, y, z) {
             // mixer = new THREE.AnimationMixer(gltf.scene);
             // var action = mixer.clipAction(gltf.animations[0]);
             // action.play();
-
-            var m = new THREE.AnimationMixer(gltf.scene);
-            mixer.push(m);
-            var action = m.clipAction(gltf.animations[0]);
-            action.play();
+            for (let i = 0; i < gltf.animations.length; ++i) {
+                var m = new THREE.AnimationMixer(gltf.scene);
+                mixer.push(m);
+                var action = m.clipAction(gltf.animations[i]);
+                action.play();
+            }
         }
         
         gltf.scene.position.x = x;
@@ -33,15 +36,13 @@ function loadGLTF(url, x, y, z) {
 
 var mesh = null;
 var ambientlight;
+var directionalLight;
 var cameralight;
 var floor = null;
 
 function addLight() {
-    //add basic light from camera towards the scene
-    cameralight = new THREE.PointLight(new THREE.Color(1, 1, 1), 1);
-    camera.add(cameralight);
-    //add ambient light
-    ambientlight = new THREE.AmbientLight(new THREE.Color(1, 1, 1), 0.5);
+    ambientLight = new THREE.AmbientLight(new THREE.Color(1, 1, 1), .5);
+    directionalLight = new THREE.DirectionalLight(new THREE.Color(1, 1, 1), 1);
 }
 
 //Create floor
@@ -57,7 +58,8 @@ function createFloor() {
 
 //Add all shapes to the scene
 function addShapes() {
-    scene.add(floor);
+    // scene.add(floor);
     scene.add(camera);
-    scene.add(ambientlight);
+    scene.add(ambientLight);
+    scene.add(directionalLight);
 }

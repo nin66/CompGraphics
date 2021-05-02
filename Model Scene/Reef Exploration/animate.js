@@ -8,8 +8,9 @@ function animate() {
     //     mixer.update(clock.getDelta());
     // }
 
+    var delta = clock.getDelta();
     mixer.forEach(function (call){
-        call.update(clock.getDelta());
+        call.update(delta);
     });
 
     requestAnimationFrame(animate);

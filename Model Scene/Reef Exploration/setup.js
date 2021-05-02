@@ -6,13 +6,13 @@ var camera;
 var renderer;
 var controls;
 var clock;
-
+var gui;
 
 //Setup the 3 main components: scene, camera, renderer
 function setScene() {
     scene = new THREE.Scene();
     var ratio = window.innerWidth / window.innerHeight;
-    camera = new THREE.PerspectiveCamera(45, ratio, 0.1, 1000);
+    camera = new THREE.PerspectiveCamera(45, ratio, 0.1, 5000);
     camera.position.set(0, 0, 20);
     camera.lookAt(0, 0, 5);
     renderer = new THREE.WebGLRenderer();
