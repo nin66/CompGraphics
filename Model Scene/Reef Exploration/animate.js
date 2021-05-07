@@ -2,19 +2,22 @@
 
 function animate() {
     renderer.render(scene, camera);
-    controls.update();
-
-    // if (mixer) {
-    //     mixer.update(clock.getDelta());
-    // }
 
     var delta = clock.getDelta();
     mixer.forEach(function (call){
         call.update(delta);
     });
 
+    moveableModels.forEach(function(model) {
+        //   Where to access all moveable models.
+        //   E.g.,
+        //  model.position.x += 1 * delta;
+        console.log(model.position);
+    });
+    
     requestAnimationFrame(animate);
 }
+
 
 //Define a raycaster from THREE to apply for intersected objects
 var raycaster = new THREE.Raycaster();

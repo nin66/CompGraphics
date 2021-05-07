@@ -42,7 +42,10 @@ function UpdatePlane() {
                 var ray = new THREE.Raycaster(new THREE.Vector3(v[i], v[i+1] + 5, v[i+2]), new THREE.Vector3(0,-1,0), 0, 10);
                 var intersects = ray.intersectObjects(scene.children);
                 if (intersects.length > 0) {
-                    var normal = intersects[0].face.normal;
+                    var face = intersects[0].face;
+                    if (face === null) { continue; }    //  Pass if there is no terrain underneath.
+
+                    var normal = face.normal;
                     if (normal !== null) {
                         if (modelIndex == 0) {
                             loadGLTF('models/gltf/Rocks.glb', v[i+1], v[i+2], v[i], normal);
@@ -81,9 +84,9 @@ function UpdatePlane() {
                         } else if (modelIndex == 19) {
                             loadGLTF('models/gltf/Rocks9.glb', v[i+1], v[i+2], v[i], normal);
                         } else if (modelIndex == 20) {
-                            loadGLTF('models/gltf/Rocks10.glb', v[i+1], v[i+2] + 1, v[i], normal);
+                            loadGLTF('models/gltf/Rocks10.glb', v[i+1], v[i+2] + 1, v[i], normal);  //  These models are so small that they are added in under the terrain and need to be pushed upwards.
                         } else if (modelIndex == 21) {
-                            loadGLTF('models/gltf/Rocks11.glb', v[i+1], v[i+2] + 1, v[i], normal);
+                            loadGLTF('models/gltf/Rocks11.glb', v[i+1], v[i+2] + 1, v[i], normal);  //  These models are so small that they are added in under the terrain and need to be pushed upwards.
                         } else if (modelIndex == 22) {
                             loadGLTF('models/gltf/Rocks12.glb', v[i+1], v[i+2], v[i], normal);
                         }

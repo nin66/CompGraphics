@@ -13,12 +13,13 @@ function setScene() {
     scene = new THREE.Scene();
     var ratio = window.innerWidth / window.innerHeight;
     camera = new THREE.PerspectiveCamera(45, ratio, 0.1, 5000);
-    camera.position.set(0, 0, 20);
+    camera.position.set(0, 50, 20);
     camera.lookAt(0, 0, 5);
     renderer = new THREE.WebGLRenderer();
     renderer.setSize(window.innerWidth, window.innerHeight);
     document.body.appendChild(renderer.domElement);
-    controls = new THREE.OrbitControls(camera, renderer.domElement);
+    // controls = new THREE.OrbitControls(camera, renderer.domElement);
+    scene.fog = new THREE.Fog(0x10388c, 150, 1000);
 
     clock = new THREE.Clock();
 

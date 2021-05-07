@@ -31,6 +31,8 @@ addShapes();
 // loadGLTF('models/gltf/Turtle.glb'        , +05, 3, +15);
 // loadGLTF('models/gltf/Whale.glb'         , +10, 3, +15);
 
+loadGLTF('models/gltf/Lobster.glb'       , -05, 3, -00, new THREE.Vector3(0, 1, 0), true);
+
 MakePlane();
 UpdatePlane();
 

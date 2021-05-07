@@ -3,21 +3,17 @@
 var GLTFLoader = new THREE.GLTFLoader();
 // let mixer;
 let mixer = [];
-let meshes = [];
-let skinned = [];
+let moveableModels = [];
 
-function loadGLTF(url, x, y, z, normal) {
+function loadGLTF(url, x, y, z, normal, bMoveable) {
     x = x || 0;     //  Default positions.
     y = y || 0;     //
     z = z || 0;     //
+    bMoveable = bMoveable || false; //  Default moveable state.
 
     GLTFLoader.load(url, (gltf) => {
 
         if (gltf.animations.length != 0) {
-            
-            // mixer = new THREE.AnimationMixer(gltf.scene);
-            // var action = mixer.clipAction(gltf.animations[0]);
-            // action.play();
             for (let i = 0; i < gltf.animations.length; ++i) {
                 var m = new THREE.AnimationMixer(gltf.scene);
                 mixer.push(m);
@@ -31,7 +27,11 @@ function loadGLTF(url, x, y, z, normal) {
                 o.castShadow = true;
                 o.receiveShadow = true;
             }
-        })
+        });
+
+        if (bMoveable) {
+            moveableModels.push(gltf.scene);
+        }
         
         gltf.scene.position.x = x;
         gltf.scene.position.y = y;
@@ -92,7 +92,6 @@ function loadGLTFCoral(url, x, y, z, normal) {
         gltf.scene.rotation.y = normal.y;
         gltf.scene.rotation.z = 0;
 
-        // gltf.scene.lookAt(gltf.scene.position.x + up.x, gltf.scene.position.y + up.y, gltf.scene.position.z + up.z);
         gltf.castShadow = true;
 
         var randomScale = Utils.random(1, 5);
