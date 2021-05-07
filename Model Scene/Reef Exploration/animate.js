@@ -1,23 +1,27 @@
-/* global THREE, cube, scene, camera, renderer */
+
 
 function animate() {
     renderer.render(scene, camera);
 
+    /** Delta time */
     var delta = clock.getDelta();
+
     mixer.forEach(function (call){
         call.update(delta);
     });
 
     moveableModels.forEach(function(model) {
-        //   Where to access all moveable models.
-        //   E.g.,
-        //  model.position.x += 1 * delta;
-        console.log(model.position);
+        // Where to access all moveable models.
+        // E.g.,
+        // console.log(model);
+        // model.position.x += 1 * delta;
+        // console.log(model.position);
     });
     
     requestAnimationFrame(animate);
 }
 
+//  Below is yoinked from the lab.
 
 //Define a raycaster from THREE to apply for intersected objects
 var raycaster = new THREE.Raycaster();

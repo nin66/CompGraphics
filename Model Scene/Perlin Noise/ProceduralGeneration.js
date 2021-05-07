@@ -10,7 +10,6 @@ var offsetX, offsetY;
 var offsetDeltaX, offsetDeltaY;
 
 var PerlinGeometry, Perlin_Material, Perlin_Mesh;
-var bDrawColours = true;
 
 var sea, sea_material, sea_mesh;
 

@@ -1,6 +1,6 @@
 
 
-var upNormal = new THREE.Vector3(0, 1, 0);
+const upNormal = new THREE.Vector3(0, 1, 0);
 let modelIndex = 0;
 
 //  Updates the plane's attributes.
@@ -8,7 +8,6 @@ function UpdatePlane() {
     //  Converts the positions of the vertices that make up the plane into an array.
     //  Later used for modifying the Z-Axis points with Perlin noise.
     var v = Perlin_Mesh.geometry.attributes.position.array;
-    var n = Perlin_Mesh.geometry.attributes.normal.array;
     const colours = [];
 
     for(var i = 0; i <= v.length; i += 3) {
@@ -95,7 +94,6 @@ function UpdatePlane() {
                         modelIndex %= 23;
                     }
                 }
-
             }
         }
     }
@@ -105,8 +103,7 @@ function UpdatePlane() {
     Perlin_Mesh.geometry.computeVertexNormals();
 
     //  Set the colours of the triangle faces.
-    if (bDrawColours)
-        PerlinGeometry.setAttribute('color', new THREE.BufferAttribute(new Float32Array(colours), 3));
+    PerlinGeometry.setAttribute('color', new THREE.BufferAttribute(new Float32Array(colours), 3));
 }
 
 //  Interpolates perlin heights using Sine Ease In-Out.

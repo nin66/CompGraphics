@@ -91,19 +91,19 @@ function RotateRelativeTo(relativeTo, axis, radians) {
 
 //  Move camera position using Vector3.
 function UpdateCameraVector3(){
-    if(ASCIIKeyCode[87]) {  //  W : Forward
+    if (ASCIIKeyCode[87]) {  //  W : Forward
         camera.translateZ(-fVMovementSpeed);
     }
 
-    if(ASCIIKeyCode[65]) {  //  A : Left
+    if (ASCIIKeyCode[65]) {  //  A : Left
         camera.translateX(-fVMovementSpeed);
     }
 
-    if(ASCIIKeyCode[83]) {  //  S : Back
+    if (ASCIIKeyCode[83]) {  //  S : Back
         camera.translateZ(fVMovementSpeed);
     }
 
-    if(ASCIIKeyCode[68]) {  //  D : Right
+    if (ASCIIKeyCode[68]) {  //  D : Right
         camera.translateX(fVMovementSpeed);
     }
 
@@ -118,19 +118,19 @@ function UpdateCameraVector3(){
 
 //  Update camera angle using Quaternion.
 function UpdateCameraQuaternion(){
-    if(ASCIIKeyCode[38]) {  //  Up
+    if (ASCIIKeyCode[38]) {  //  Up
         camera.rotateOnAxis (new THREE.Vector3(1,0,0), 0.015);
     }
 
-    if(ASCIIKeyCode[37]) {  //  Left
+    if (ASCIIKeyCode[37]) {  //  Left
         RotateRelativeTo(camera, new THREE.Vector3(0,1,0), 0.015)
     }
 
-    if(ASCIIKeyCode[40]) {  //  Down
+    if (ASCIIKeyCode[40]) {  //  Down
         camera.rotateOnAxis (new THREE.Vector3(1,0,0), -0.015);
     }
 
-    if(ASCIIKeyCode[39]) {  //  Right
+    if (ASCIIKeyCode[39]) {  //  Right
         RotateRelativeTo(camera, new THREE.Vector3(0,1,0), -0.015)
     }
 }

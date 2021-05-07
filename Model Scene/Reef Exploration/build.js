@@ -1,10 +1,19 @@
 
 
 var GLTFLoader = new THREE.GLTFLoader();
-// let mixer;
 let mixer = [];
+/** An array of all moveable models. */
 let moveableModels = [];
 
+/**
+ * Loads a GLTF model from url into the scene at x, y and z on a normal.
+ * @param { string } url The URL of the model.
+ * @param { number } x The World-X position of where the model should spawn.
+ * @param { number } y The World-Y position of where the model should spawn.
+ * @param { number } z The World-Z position of where the model should spawn.
+ * @param { THREE.Vector3} normal The THREE.Vector3 up normal of the surface to spawn on.
+ * @param { boolean } bMoveable Is this model moveable?
+ */
 function loadGLTF(url, x, y, z, normal, bMoveable) {
     x = x || 0;     //  Default positions.
     y = y || 0;     //
@@ -33,10 +42,12 @@ function loadGLTF(url, x, y, z, normal, bMoveable) {
             moveableModels.push(gltf.scene);
         }
         
+        //  Apply positions.
         gltf.scene.position.x = x;
         gltf.scene.position.y = y;
         gltf.scene.position.z = z;
 
+        //  Apply normals.
         gltf.scene.rotation.x = normal.x;
         gltf.scene.rotation.y = normal.y;
         gltf.scene.rotation.z = 0;
@@ -47,6 +58,7 @@ function loadGLTF(url, x, y, z, normal, bMoveable) {
         var randomScale = Utils.random(1, 5);
         gltf.scene.scale.set(randomScale, randomScale, randomScale);
 
+        //  Axes helper for rotations and normals.
         const ax = new THREE.AxesHelper(20);
         gltf.scene.add(ax);
 
@@ -54,6 +66,14 @@ function loadGLTF(url, x, y, z, normal, bMoveable) {
     });
 }
 
+/**
+ * Loads a GLTF coral model from url into the scene at x, y and z on a normal.
+ * @param { string } url The URL of the model.
+ * @param { number } x The World-X position of where the model should spawn.
+ * @param { number } y The World-Y position of where the model should spawn.
+ * @param { number } z The World-Z position of where the model should spawn.
+ * @param { THREE.Vector3 } normal The THREE.Vector3 up normal of the surface to spawn on.
+ */
 function loadGLTFCoral(url, x, y, z, normal) {
     x = x || 0;     //  Default positions.
     y = y || 0;     //
@@ -62,10 +82,6 @@ function loadGLTFCoral(url, x, y, z, normal) {
     GLTFLoader.load(url, (gltf) => {
 
         if (gltf.animations.length != 0) {
-            
-            // mixer = new THREE.AnimationMixer(gltf.scene);
-            // var action = mixer.clipAction(gltf.animations[0]);
-            // action.play();
             for (let i = 0; i < gltf.animations.length; ++i) {
                 var m = new THREE.AnimationMixer(gltf.scene);
                 mixer.push(m);
@@ -74,6 +90,7 @@ function loadGLTFCoral(url, x, y, z, normal) {
             }
         }
 
+        //  Set the coral's material and colour.
         gltf.scene.traverse(function(o){
             if (o.isMesh) {
                 o.castShadow = true;
@@ -84,10 +101,12 @@ function loadGLTFCoral(url, x, y, z, normal) {
             }
         })
         
+        //  Apply positions.
         gltf.scene.position.x = x;
         gltf.scene.position.y = y;
         gltf.scene.position.z = z;
 
+        //  Apply normals.
         gltf.scene.rotation.x = normal.x;
         gltf.scene.rotation.y = normal.y;
         gltf.scene.rotation.z = 0;
