@@ -21,6 +21,9 @@ function setScene() {
     controls = new THREE.OrbitControls(camera, renderer.domElement);
 
     clock = new THREE.Clock();
+
+    const h = new THREE.AxesHelper(100000000);
+    scene.add(h);
 }
 
 //Resize the scene and update the camera aspect to the screen ration

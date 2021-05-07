@@ -30,13 +30,11 @@ function Start(){
     //  Plane settings.
     width = 2048;
     height = 2048;
-    resolution = 600;
+    resolution = 500;
     
     //  Perlin noise settings. [PLANE]
     scale = 250;
     heightMultiplier = 105;
-    offsetY = 0.0;
-    offsetX = 0.0;
 
     offsetDeltaX = .025;
     offsetDeltaY = .025;

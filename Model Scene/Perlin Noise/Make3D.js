@@ -61,7 +61,6 @@ function MakeTree(x, y, z) {
 //  Creates a plane.
 function MakePlane(){
     PerlinGeometry = new THREE.PlaneBufferGeometry(width, height, resolution, resolution);
-    PerlinGeometry.computeVertexNormals();
     //var geometry_material = new THREE.MeshBasicMaterial();
     Perlin_Material = new THREE.MeshPhongMaterial();
     Perlin_Material.flatShading = false;
@@ -73,11 +72,11 @@ function MakePlane(){
     rot = 270 * ((Math.PI * 2) / 360); //  Flip using Rad2Deg.
     Perlin_Mesh.rotation.x = rot;
     Perlin_Mesh.rotation.z = rot;
-    Perlin_Mesh.position.set(0, -5, 0);
-
+    
     Perlin_Mesh.castShadow = true;
     Perlin_Mesh.receiveShadow = true;
     
+    PerlinGeometry.computeVertexNormals();
     scene.add(Perlin_Mesh);
 }
 
