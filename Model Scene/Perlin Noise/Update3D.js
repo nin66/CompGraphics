@@ -2,6 +2,29 @@
 
 const upNormal = new THREE.Vector3(0, 1, 0);
 let modelIndex = 0;
+let models = [
+    'models/gltf/Rocks.glb',
+    'models/gltf/Coral.glb',
+    'models/gltf/Coral1.glb',
+    'models/gltf/Coral2.glb',
+    'models/gltf/Coral3.glb',
+    'models/gltf/Coral4.glb',
+    'models/gltf/Coral5.glb',
+    'models/gltf/Coral6.glb',
+    'models/gltf/Shells.glb',
+    'models/gltf/Rocks1.glb',
+    'models/gltf/Rocks2.glb',
+    'models/gltf/Rocks3.glb',
+    'models/gltf/Rocks4.glb',
+    'models/gltf/Rocks5.glb',
+    'models/gltf/Rocks6.glb',
+    'models/gltf/Rocks7.glb',
+    'models/gltf/Rocks8.glb',
+    'models/gltf/Rocks9.glb',
+    'models/gltf/Rocks10.glb',
+    'models/gltf/Rocks11.glb',
+    'models/gltf/Rocks12.glb'
+]
 
 //  Updates the plane's attributes.
 function UpdatePlane() {
@@ -46,52 +69,12 @@ function UpdatePlane() {
 
                     var normal = face.normal;
                     if (normal !== null) {
-                        if (modelIndex == 0) {
-                            loadGLTF('models/gltf/Rocks.glb', v[i+1], v[i+2], v[i], normal);
-                        } else if (modelIndex == 1) {
-                            loadGLTFCoral('models/gltf/Coral.glb', v[i+1], v[i+2], v[i], normal);
-                        } else if (modelIndex == 2) {
-                            loadGLTFCoral('models/gltf/Coral1.glb', v[i+1], v[i+2], v[i], normal);
-                        } else if (modelIndex == 3) {
-                            loadGLTFCoral('models/gltf/Coral2.glb', v[i+1], v[i+2], v[i], normal);
-                        } else if (modelIndex == 4) {
-                            loadGLTFCoral('models/gltf/Coral3.glb', v[i+1], v[i+2], v[i], normal);
-                        } else if (modelIndex == 5) {
-                            loadGLTFCoral('models/gltf/Coral4.glb', v[i+1], v[i+2], v[i], normal);
-                        } else if (modelIndex == 6) {
-                            loadGLTFCoral('models/gltf/Coral5.glb', v[i+1], v[i+2], v[i], normal);
-                        } else if (modelIndex == 7) {
-                            loadGLTFCoral('models/gltf/Coral6.glb', v[i+1], v[i+2], v[i], normal);
-                        } else if (modelIndex == 8) {
-                            loadGLTF('models/gltf/Shells.glb', v[i+1], v[i+2], v[i], normal);
-                        } else if (modelIndex == 9) {
-                            loadGLTF('models/gltf/Rocks1.glb', v[i+1], v[i+2], v[i], normal);
-                        } else if (modelIndex == 10) {
-                            loadGLTF('models/gltf/Rocks2.glb', v[i+1], v[i+2], v[i], normal);
-                        } else if (modelIndex == 11) {
-                            loadGLTF('models/gltf/Rocks3.glb', v[i+1], v[i+2], v[i], normal);
-                        } else if (modelIndex == 12) {
-                            loadGLTF('models/gltf/Rocks4.glb', v[i+1], v[i+2], v[i], normal);
-                        } else if (modelIndex == 13) {
-                            loadGLTF('models/gltf/Rocks5.glb', v[i+1], v[i+2], v[i], normal);
-                        } else if (modelIndex == 16) {
-                            loadGLTF('models/gltf/Rocks6.glb', v[i+1], v[i+2], v[i], normal);
-                        } else if (modelIndex == 17) {
-                            loadGLTF('models/gltf/Rocks7.glb', v[i+1], v[i+2], v[i], normal);
-                        } else if (modelIndex == 18) {
-                            loadGLTF('models/gltf/Rocks8.glb', v[i+1], v[i+2], v[i], normal);
-                        } else if (modelIndex == 19) {
-                            loadGLTF('models/gltf/Rocks9.glb', v[i+1], v[i+2], v[i], normal);
-                        } else if (modelIndex == 20) {
-                            loadGLTF('models/gltf/Rocks10.glb', v[i+1], v[i+2] + 1, v[i], normal);  //  These models are so small that they are added in under the terrain and need to be pushed upwards.
-                        } else if (modelIndex == 21) {
-                            loadGLTF('models/gltf/Rocks11.glb', v[i+1], v[i+2] + 1, v[i], normal);  //  These models are so small that they are added in under the terrain and need to be pushed upwards.
-                        } else if (modelIndex == 22) {
-                            loadGLTF('models/gltf/Rocks12.glb', v[i+1], v[i+2], v[i], normal);
+                        if(modelIndex >= models.length){
+                            modelIndex = 0;
                         }
-
-                        modelIndex++;
-                        modelIndex %= 23;
+                        loadGLTF(models[modelIndex], v[i+1], v[i+2], v[i], normal);
+                        console.log(modelIndex)
+                        //modelIndex++;
                     }
                 }
             }
