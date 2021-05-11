@@ -1,9 +1,10 @@
-
+var objects = [];
 
 var GLTFLoader = new THREE.GLTFLoader();
 let mixer = [];
 /** An array of all moveable models. */
 let moveableModels = [];
+
 
 /**
  * Loads a GLTF model from url into the scene at x, y and z on a normal.
@@ -40,9 +41,9 @@ function loadGLTF(url, x, y, z, normal, name, bMoveable) {
             }
         });
 
-        if (bMoveable) {
-            moveableModels.push(gltf.scene);
-        }
+        // if (bMoveable) {
+        //     moveableModels.push(gltf.scene);
+        // }
         
         //  Apply positions.
         gltf.scene.position.x = x;
@@ -98,6 +99,7 @@ function loadGLTFCoral(url, x, y, z, normal, name) {
         //  Set the coral's material and colour.
         gltf.scene.traverse(function(o){
             if (o.isMesh) {
+                objects.push(o);
                 o.castShadow = true;
                 o.receiveShadow = true;
 
@@ -107,6 +109,7 @@ function loadGLTFCoral(url, x, y, z, normal, name) {
                 o.name = name;
             }
         })
+
         
         //  Apply positions.
         gltf.scene.position.x = x;
