@@ -1,9 +1,10 @@
-
+var objects = [];
 
 var GLTFLoader = new THREE.GLTFLoader();
 let mixer = [];
 /** An array of all moveable models. */
 let moveableModels = [];
+
 
 /**
  * Loads a GLTF model from url into the scene at x, y and z on a normal.
@@ -18,7 +19,7 @@ function loadGLTF(url, x, y, z, normal, bMoveable) {
     x = x || 0;     //  Default positions.
     y = y || 0;     //
     z = z || 0;     //
-    bMoveable = bMoveable || false; //  Default moveable state.
+   // bMoveable = bMoveable || false; //  Default moveable state.
 
     GLTFLoader.load(url, (gltf) => {
 
@@ -38,9 +39,9 @@ function loadGLTF(url, x, y, z, normal, bMoveable) {
             }
         });
 
-        if (bMoveable) {
-            moveableModels.push(gltf.scene);
-        }
+        // if (bMoveable) {
+        //     moveableModels.push(gltf.scene);
+        // }
         
         //  Apply positions.
         gltf.scene.position.x = x;
@@ -75,9 +76,6 @@ function loadGLTF(url, x, y, z, normal, bMoveable) {
  * @param { THREE.Vector3 } normal The THREE.Vector3 up normal of the surface to spawn on.
  */
 function loadGLTFCoral(url, x, y, z, normal) {
-    x = x || 0;     //  Default positions.
-    y = y || 0;     //
-    z = z || 0;     //
 
     GLTFLoader.load(url, (gltf) => {
 
@@ -93,6 +91,7 @@ function loadGLTFCoral(url, x, y, z, normal) {
         //  Set the coral's material and colour.
         gltf.scene.traverse(function(o){
             if (o.isMesh) {
+                objects.push(o);
                 o.castShadow = true;
                 o.receiveShadow = true;
 
@@ -100,6 +99,7 @@ function loadGLTFCoral(url, x, y, z, normal) {
                 o.material.emissive = new THREE.Color(Math.random(), Math.random(), Math.random());
             }
         })
+
         
         //  Apply positions.
         gltf.scene.position.x = x;
