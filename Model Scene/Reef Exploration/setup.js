@@ -6,6 +6,7 @@ var camera;
 var renderer;
 var controls;
 var clock;
+var flashlight;
 var gui;
 var dragControls;
 
@@ -24,7 +25,11 @@ function setScene() {
     scene.fog = new THREE.Fog(0x10388c, 150, 1000);
 
     clock = new THREE.Clock();
-
+    flashlight = new THREE.SpotLight(0xffffff,3, 300, 75, 0.5);
+    camera.add(flashlight);
+    flashlight.position.set(0,0,1);
+    // flashlight.distance =50;
+    flashlight.target = camera;
     const h = new THREE.AxesHelper(100000000);
     scene.add(h);
 }
