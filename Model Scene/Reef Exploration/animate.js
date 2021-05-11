@@ -25,38 +25,26 @@ function animate() {
 
 //Define a raycaster from THREE to apply for intersected objects
 var raycaster = new THREE.Raycaster();
+raycaster.near = 0;
+raycaster.far = 5000;
 //Define a selected object
 //  A flag saying if the object has been selected or not.
 var selectedObject = false;
 
+var geo = new THREE.BoxGeometry();
+var mat = new THREE.MeshBasicMaterial();
+
 //add event listener to the model and move the model with mouse-down position
 function onDocumentMouseDown(event) {
     var mouse = new THREE.Vector2();
-    mouse.x = (event.clientX / renderer.domElement.clientWidth) * 2 - 1
-    mouse.y = (event.clientY / renderer.domElement.clientHeight) * 2 - 1;
+    mouse.x = (event.clientX / window.innerWidth) * 2 - 1
+    mouse.y = -(event.clientY / window.innerHeight) * 2 + 1;
 
     raycaster.setFromCamera(mouse, camera);
-
-    var intersects = raycaster.intersectObjects(scene.children, false);
-    
+    var intersects = raycaster.intersectObjects(scene.children, true);
     if (intersects.length > 0) {    //  RaycastHit = true.
-        //  If we selected the model.
-        if ((intersects[0].object.name === 'Loaded Mesh') && !selectedObject){
-            intersects[0].object.material.color = new THREE.Color(1, 1.5, .155);
-            console.log("moised");
-            selectedObject = true;
-        }
-
-        //  If model is not selected or dropped.
-        if ((intersects[0].object.name !== 'Loaded Mesh') && selectedObject){
-            mesh.material.color = new THREE.Color(.6, .2, .4);
-
-            var pos = intersects[0].point;
-
-            mesh.position.x = pos.x;
-            mesh.position.y = -pos.y;
-
-            selectedObject = false;
+        if (intersects[0].object.name.length !== 0) {
+            console.log(intersects[0].object.name);
         }
     }
 }

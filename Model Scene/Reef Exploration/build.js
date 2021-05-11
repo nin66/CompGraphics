@@ -12,13 +12,13 @@ let moveableModels = [];
  * @param { number } y The World-Y position of where the model should spawn.
  * @param { number } z The World-Z position of where the model should spawn.
  * @param { THREE.Vector3} normal The THREE.Vector3 up normal of the surface to spawn on.
+ * @param { string } name The name of the model.
  * @param { boolean } bMoveable Is this model moveable?
  */
-function loadGLTF(url, x, y, z, normal, bMoveable) {
+function loadGLTF(url, x, y, z, normal, name, bMoveable) {
     x = x || 0;     //  Default positions.
     y = y || 0;     //
     z = z || 0;     //
-    bMoveable = bMoveable || false; //  Default moveable state.
 
     GLTFLoader.load(url, (gltf) => {
 
@@ -35,6 +35,8 @@ function loadGLTF(url, x, y, z, normal, bMoveable) {
             if (o.isMesh) {
                 o.castShadow = true;
                 o.receiveShadow = true;
+
+                o.name = name;
             }
         });
 
@@ -58,9 +60,11 @@ function loadGLTF(url, x, y, z, normal, bMoveable) {
         var randomScale = Utils.random(1, 5);
         gltf.scene.scale.set(randomScale, randomScale, randomScale);
 
-        //  Axes helper for rotations and normals.
-        const ax = new THREE.AxesHelper(20);
-        gltf.scene.add(ax);
+        // //  Axes helper for rotations and normals.
+        // const ax = new THREE.AxesHelper(20);
+        // gltf.scene.add(ax);
+
+        gltf.scene.name = name;
 
         scene.add(gltf.scene);
     });
@@ -73,8 +77,9 @@ function loadGLTF(url, x, y, z, normal, bMoveable) {
  * @param { number } y The World-Y position of where the model should spawn.
  * @param { number } z The World-Z position of where the model should spawn.
  * @param { THREE.Vector3 } normal The THREE.Vector3 up normal of the surface to spawn on.
+ * @param { string } name The name of the model.
  */
-function loadGLTFCoral(url, x, y, z, normal) {
+function loadGLTFCoral(url, x, y, z, normal, name) {
     x = x || 0;     //  Default positions.
     y = y || 0;     //
     z = z || 0;     //
@@ -98,6 +103,8 @@ function loadGLTFCoral(url, x, y, z, normal) {
 
                 o.material = new THREE.MeshLambertMaterial();
                 o.material.emissive = new THREE.Color(Math.random(), Math.random(), Math.random());
+
+                o.name = name;
             }
         })
         
@@ -116,8 +123,10 @@ function loadGLTFCoral(url, x, y, z, normal) {
         var randomScale = Utils.random(1, 5);
         gltf.scene.scale.set(randomScale, randomScale, randomScale);
 
-        const ax = new THREE.AxesHelper(20);
-        gltf.scene.add(ax);
+        // const ax = new THREE.AxesHelper(20);
+        // gltf.scene.add(ax);
+
+        gltf.scene.name = name;
 
         scene.add(gltf.scene);
     });
