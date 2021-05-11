@@ -28,7 +28,6 @@ function setScene() {
     flashlight = new THREE.SpotLight(0xffffff,3, 300, 75, 0.5);
     camera.add(flashlight);
     flashlight.position.set(0,0,1);
-    // flashlight.distance =50;
     flashlight.target = camera;
     const h = new THREE.AxesHelper(100000000);
     scene.add(h);
