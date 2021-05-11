@@ -1,6 +1,5 @@
 /* 
-    Created on : 04/03/2020, 3:08:18 PM
-    Author     : george
+    Authors     : Group 87 Autumn 2021 INTRODUCTION TO COMPUTER GRAPHICS
 */
 
 canvas {
@@ -9,7 +8,7 @@ canvas {
 }
 
 body {
-    font-family: Monospace;
+    font-family: 'Roboto', sans-serif;
     margin: 0px;
     overflow: hidden;
 }
@@ -29,4 +28,96 @@ h1 {
     width: 100%;
     padding: 10px 5px;
     margin-top: auto;
+}
+
+.informationbox {
+    text-align: center;
+    color : white;
+}
+
+#modelname {
+    position : absolute;
+    bottom : 10%;
+    width : 100%;
+    text-align : center;
+    font-size : 50px;
+}
+
+.modelname {
+    text-align: center;
+    text-transform: uppercase;
+
+    padding-top: 1%;
+    padding-bottom: 1%;
+}
+
+#modelinfo {
+    position : absolute;
+    bottom : 5%;
+    width : 100%;
+    text-align : center;
+    font-size : 25px;
+}
+
+.modelinfo {
+    text-align: center;
+    position: relative;
+
+
+    padding-bottom: 0%;
+    padding-top: 10%;
+
+    font-weight: 200;
+    font-size: 100%;
+}
+
+#modelname {
+    text-align: center;
+}
+
+#modelinfo {
+    text-align: center;
+    top:85%;
+    bottom:5%;
+}
+
+/*//////////////////////////////////////////////////////////////////////////////////////////////////////////////*/
+
+
+/* PARAGRAPH AND TEXT STYLES */
+
+.basicHead {
+    color: #1FBEB9;
+    text-transform: uppercase;
+    bottom : 10%;
+}
+
+.simplePara{
+  position: relative;
+
+  font-size: 50%;
+}
+
+.C{
+  text-align: center;
+
+  list-style-type: none;
+}
+
+.cap{
+  text-transform: uppercase;
+}
+
+.bold{
+  font-weight: 500;
+}
+
+.link{
+  text-decoration: none;
+
+  color: #00ACA7; /* FROM THE PETRONAS LOGO */
+}
+
+.botspace {
+  padding-bottom: 2.5%;
 }
