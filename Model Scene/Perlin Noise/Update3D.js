@@ -28,8 +28,6 @@ function UpdatePlane() {
         v[i+2] = Function(Perlin) * heightMultiplier;   //  This noise function returns a smoothed value
                                                         //  between -1 and 1.
                                                         //  Use Perlin Noise to generate heights and colours.
-        var bCoralPlaced = false;
-
         if (Perlin < 0) {
             var startColour = Utils.RGB(177, 176, 140);
             var targetColour = Utils.RGB(232, 227, 174);
@@ -42,41 +40,43 @@ function UpdatePlane() {
             var colour = new THREE.Color();
             colour.lerpColors(startColour, targetColour, Perlin);     //  Interpolate colour based on Perlin Noise.
 			colours.push(colour.r, colour.g, colour.b);
+        }
 
-			if (Math.random() < .01) {
-                var ray = new THREE.Raycaster(new THREE.Vector3(v[i], v[i+1] + 5, v[i+2]), new THREE.Vector3(0,-1,0), 0, 10);
-                var intersects = ray.intersectObjects(scene.children);
-                if (intersects.length > 0) {
-                    var face = intersects[0].face;
-                    if (face === null) { continue; }    //  Pass if there is no terrain underneath.
+        var bCoralPlaced = false;
 
-                    var normal = face.normal;
-                    if (normal !== null) {
-                        if (coralIndex == 0) {
-                            loadGLTFCoral('models/gltf/Coral.glb', v[i + 1], v[i + 2], v[i], normal, kCoral, false);
-                        } else if (coralIndex == 1) {
-                            loadGLTFCoral('models/gltf/Coral1.glb', v[i + 1], v[i + 2], v[i], normal, kCoral, false);
-                        } else if (coralIndex == 2) {
-                            loadGLTFCoral('models/gltf/Coral2.glb', v[i + 1], v[i + 2], v[i], normal, kCoral, false);
-                        } else if (coralIndex == 3) {
-                            loadGLTFCoral('models/gltf/Coral3.glb', v[i + 1], v[i + 2], v[i], normal, kCoral, false);
-                        } else if (coralIndex == 4) {
-                            loadGLTFCoral('models/gltf/Coral4.glb', v[i + 1], v[i + 2], v[i], normal, kCoral, false);
-                        } else if (coralIndex == 5) {
-                            loadGLTFCoral('models/gltf/Coral5.glb', v[i + 1], v[i + 2], v[i], normal, kCoral, false);
-                        } else if (coralIndex == 6) {
-                            loadGLTFCoral('models/gltf/Coral6.glb', v[i + 1], v[i + 2], v[i], normal, kCoral, false);
-                        } else if (coralIndex == 7) {
-                            loadGLTF('models/gltf/SeaWeed.glb', v[i+1], v[i+2], v[i], normal, 'SeaWeed', false);
-                        }
+        if (Math.random() < .0023) {
+            var ray = new THREE.Raycaster(new THREE.Vector3(v[i], v[i+1] + 5, v[i+2]), new THREE.Vector3(0,-1,0), 0, 10);
+            var intersects = ray.intersectObjects(scene.children);
+            if (intersects.length > 0) {
+                var face = intersects[0].face;
+                if (face === null) { continue; }    //  Pass if there is no terrain underneath.
 
-                        coralIndex++;
-                        coralIndex %= 8;
-        
-                        bCoralPlaced = true;
+                var normal = face.normal;
+                if (normal !== null) {
+                    if (coralIndex == 0) {
+                        loadGLTFCoral('models/gltf/Coral.glb', v[i + 1], v[i + 2], v[i], normal, kCoral, false);
+                    } else if (coralIndex == 1) {
+                        loadGLTFCoral('models/gltf/Coral1.glb', v[i + 1], v[i + 2], v[i], normal, kCoral, false);
+                    } else if (coralIndex == 2) {
+                        loadGLTFCoral('models/gltf/Coral2.glb', v[i + 1], v[i + 2], v[i], normal, kCoral, false);
+                    } else if (coralIndex == 3) {
+                        loadGLTFCoral('models/gltf/Coral3.glb', v[i + 1], v[i + 2], v[i], normal, kCoral, false);
+                    } else if (coralIndex == 4) {
+                        loadGLTFCoral('models/gltf/Coral4.glb', v[i + 1], v[i + 2], v[i], normal, kCoral, false);
+                    } else if (coralIndex == 5) {
+                        loadGLTFCoral('models/gltf/Coral5.glb', v[i + 1], v[i + 2], v[i], normal, kCoral, false);
+                    } else if (coralIndex == 6) {
+                        loadGLTFCoral('models/gltf/Coral6.glb', v[i + 1], v[i + 2], v[i], normal, kCoral, false);
+                    } else if (coralIndex == 7) {
+                        loadGLTF('models/gltf/SeaWeed.glb', v[i+1], v[i+2], v[i], normal, 'SeaWeed', false);
                     }
+
+                    coralIndex++;
+                    coralIndex %= 8;
+    
+                    bCoralPlaced = true;
                 }
-			}
+            }
         }
 
         if (!bCoralPlaced) {

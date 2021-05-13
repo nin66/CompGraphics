@@ -72,13 +72,14 @@ h1 {
 }
 
 #modelname {
-    text-align: center;
+    text-align : center;
 }
 
 #modelinfo {
-    text-align: center;
-    top:85%;
-    bottom:5%;
+    text-align : center;
+    top : 85%;
+    bottom : 5%;
+    color : white;
 }
 
 /*//////////////////////////////////////////////////////////////////////////////////////////////////////////////*/

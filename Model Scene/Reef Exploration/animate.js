@@ -38,7 +38,6 @@ function onDocumentMouseDown(event) {
     var intersects = raycaster.intersectObjects(scene.children, true);
     if (intersects.length > 0) {    //  RaycastHit = true.
 		if (intersects[0].object.name.length !== 0) {
-			console.log(intersects[0].object.name);
             const name = intersects[0].object.name;
             document.getElementById('modelname').innerHTML = name;
             switch (name) {
@@ -46,8 +45,16 @@ function onDocumentMouseDown(event) {
                     document.getElementById('modelinfo').innerHTML = Information.Lobster();
                     break;
                 case kRocks:
+                    document.getElementById('modelinfo').innerHTML = Information.Rocks();
                     break;
                 case kCoral:
+                    document.getElementById('modelinfo').innerHTML = Information.Coral();
+                    break;
+                case 'Shells':
+                    document.getElementById('modelinfo').innerHTML = Information.Shells();
+                    break;
+                case 'SeaWeed':
+                    document.getElementById('modelinfo').innerHTML = Information.Seaweed();
                     break;
             }
         } else {
