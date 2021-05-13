@@ -28,8 +28,6 @@ var raycaster = new THREE.Raycaster();
 raycaster.near = 0;
 raycaster.far = 5000;
 
-var info = new Information();
-
 //add event listener to the model and move the model with mouse-down position
 function onDocumentMouseDown(event) {
     var mouse = new THREE.Vector2();
@@ -46,6 +44,10 @@ function onDocumentMouseDown(event) {
             switch (name) {
                 case 'Lobster':
                     document.getElementById('modelinfo').innerHTML = Information.Lobster();
+                    break;
+                case kRocks:
+                    break;
+                case kCoral:
                     break;
             }
         } else {

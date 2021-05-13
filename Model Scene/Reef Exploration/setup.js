@@ -21,7 +21,7 @@ function setScene() {
     document.body.appendChild(renderer.domElement);
     // controls = new THREE.OrbitControls(camera, renderer.domElement);
     dragControls = new THREE.DragControls(objects, camera, renderer.domElement);
-    scene.fog = new THREE.Fog(0x10388c, 150, 1000);
+    scene.fog = new THREE.Fog(0x10388c, 250, 1000);
 
     clock = new THREE.Clock();
 
