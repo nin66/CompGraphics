@@ -46,7 +46,7 @@ class Information {
     ]
 
     static Coral() {
-        var random = Utils.random(0, 7);
+        var random = Utils.random(0, 6);
         var i = Math.round(random);
 
         return Information.coral[i];
@@ -64,7 +64,7 @@ class Information {
     ]
 
     static Shells() {
-        var random = Utils.random(0, 7);
+        var random = Utils.random(0, 6);
         var i = Math.round(random);
 
         return Information.shell[i];
