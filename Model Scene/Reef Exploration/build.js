@@ -1,9 +1,10 @@
-var objects = [];
-
+var objects = []; //objects that are draggable, pushed to this array
+var ambientlight;
 var GLTFLoader = new THREE.GLTFLoader();
 let mixer = [];
 /** An array of all moveable models. */
 let moveableModels = [];
+
 
 
 /**
@@ -36,7 +37,7 @@ function loadGLTF(url, x, y, z, normal, name, bMoveable) {
             if (o.isMesh) {
                 o.castShadow = true;
                 o.receiveShadow = true;
-
+                o.scale.set(2, 2, 2);
                 o.name = name;
             }
         });
@@ -102,8 +103,8 @@ function loadGLTFCoral(url, x, y, z, normal, name) {
                 objects.push(o);
                 o.castShadow = true;
                 o.receiveShadow = true;
-
-                o.material = new THREE.MeshLambertMaterial();
+                o.scale.set(2, 2, 2);
+                o.material = new THREE.MeshStandardMaterial();
                 o.material.emissive = new THREE.Color(Math.random(), Math.random(), Math.random());
 
                 o.name = name;
@@ -136,7 +137,7 @@ function loadGLTFCoral(url, x, y, z, normal, name) {
 }
 
 var mesh = null;
-var ambientlight;
+
 var directionalLight;
 var cameralight;
 var floor = null;

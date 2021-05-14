@@ -22,8 +22,12 @@ function setScene() {
     document.body.appendChild(renderer.domElement);
     // controls = new THREE.OrbitControls(camera, renderer.domElement);
     dragControls = new THREE.DragControls(objects, camera, renderer.domElement);
-    scene.fog = new THREE.Fog(0x10388c, 150, 1000);
+    //scene.fog = new THREE.Fog(0x10388c, 150, 1000);
+    const loader = new THREE.TextureLoader();
+const bgTexture = loader.load('bg2.png');
+scene.background = bgTexture;
 
+    scene.fog = new THREE.FogExp2(0x144b6d, 0.003);
     clock = new THREE.Clock();
     flashlight = new THREE.SpotLight(0xffffff,3, 300, 75, 0.5);
     camera.add(flashlight);
