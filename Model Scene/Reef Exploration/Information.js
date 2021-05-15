@@ -1,18 +1,20 @@
 
 
 //  Allows up to three lines of information.
+//  To separate lines, use html tag '<br>', instead of escape character '\n', in the sentence.
 
 class Information {
 
     static lobster = [
         "Lobsters are red when cooked.",
-        "Lobsters taste with their legs and chew with their stomachs."
+        "Lobsters taste with their legs and chew with their stomachs.",
+        "A group of Lobsters is called a pod"
     ]
 
+    static nLobster = 0;
+
     static Lobster(){
-        var random = Utils.random(0, 1);
-        var i = Math.round(random);
-        return Information.lobster[i];
+        return Information.lobster[Information.nLobster++ % Information.lobster.length];
     }
 
     static rock = [
@@ -28,11 +30,10 @@ class Information {
         "Mohs scale of hardness measures the ability of minerals to scratch each other."
     ]
 
-    static Rocks() {
-        var random = Utils.random(0, 9);
-        var i = Math.round(random);
+    static nRock = 0;
 
-        return Information.rock[i];
+    static Rocks() {
+        return Information.rock[Information.nRock++ % Information.rock.length];
     }
 
     static coral = [
@@ -45,11 +46,10 @@ class Information {
         "Coral reefs are naturally colourful because of algae, which lives inside of the coral, providing them with food."
     ]
 
-    static Coral() {
-        var random = Utils.random(0, 6);
-        var i = Math.round(random);
+    static nCoral = 0;
 
-        return Information.coral[i];
+    static Coral() {
+        return Information.coral[Information.nCoral++ % Information.coral.length];
     }
 
     static shell = [
@@ -63,11 +63,10 @@ class Information {
 
     ]
 
-    static Shells() {
-        var random = Utils.random(0, 6);
-        var i = Math.round(random);
+    static nShell = 0;
 
-        return Information.shell[i];
+    static Shells() {
+        return Information.shell[Information.nShell++ % Information.shell.length];
     }
 
     static seaweed = [
@@ -78,10 +77,35 @@ class Information {
         "Seaside cultures, have included seaweed in their food for hundreds of years.",
     ]
 
-    static Seaweed() {
-        var random = Utils.random(0, 4);
-        var i = Math.round(random);
+    static nSeaweed = 0;
 
-        return Information.seaweed[i];
+    static Seaweed() {
+        return Information.seaweed[Information.nSeaweed++ % Information.seaweed.length];
+    }
+
+    static fish = [
+        "There are over 33,000 known species of Fish, 5,000 of which are extinct :(",
+        "The largest Fish ever caught was a Great White Shark, weighing 1.2 tonnes, according to the International Game Fish Association.<br>Caught off the coast in Australia, it took 50 minutes to be declared 'fished'.",
+        "Parrotfish surround themselves in their own mucus for protection.",
+        "Together, the Gulf Corvina are the loudest Fish, averaging 190 decibels with a record of 202 decibels.<br>Krakatoa, believed to be the loudest natural sound, is estimated at 172 decibels at 160 kilometres.",
+        "Catfish have over 27,000 tastebuds.",
+        "A school is a group of the same Fish species swimming together in synchrony.",
+        "Greenland Sharks have a lifespace of 400 years. The longest lasting lifeform ever on Earth."
+    ]
+
+    static nFish = 0;
+
+    static Fish() {
+        return Information.fish[Information.nFish++ % Information.fish.length];
+    }
+
+    static starfish = [
+        "Starfish are not actually Fish. Neither are Jellyfish.<br>They don't have gills, scales or fins.<br>Instead of blood, sea water is used to pump nutrients through their bodies; a water vascular system."
+    ]
+    
+    static nStarfish = 0;
+
+    static StarFish(){
+        return Information.starfish[Information.nStarfish++ % Information.starfish.length];
     }
 }
