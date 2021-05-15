@@ -4,9 +4,6 @@ const upNormal = new THREE.Vector3(0, 1, 0);
 let modelIndex = 0;
 let coralIndex = 0;
 
-const kRocks = 'Rocks';
-const kCoral = 'Coral';
-
 //  Updates the plane's attributes.
 function UpdatePlane() {
     //  Converts the positions of the vertices that make up the plane into an array.
