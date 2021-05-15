@@ -5,6 +5,11 @@ let mixer = [];
 /** An array of all moveable models. */
 let moveableModels = [];
 
+var V3Zero = new THREE.Vector3(0, 0, 0);
+
+const kRocks = 'Rocks';
+const kCoral = 'Coral';
+const kFish = 'Fish';
 
 
 /**
@@ -133,6 +138,18 @@ function loadGLTFCoral(url, x, y, z, normal, name) {
         gltf.scene.name = name;
 
         scene.add(gltf.scene);
+
+        if (randomScale > 4) {
+            var random = Math.random();
+            if (random < .25)
+                loadGLTF('models/gltf/BrownFish.glb', x, y + 10, z, V3Zero, kFish, true);
+            else if (random < .5)
+                loadGLTF('models/gltf/Dory.glb', x, y + 10, z, V3Zero, kFish, true);
+            else if (random < .75)
+                loadGLTF('models/gltf/Marlin.glb', x, y + 10, z, V3Zero, kFish, true);
+            else
+                loadGLTF('models/gltf/Tuna.glb', x, y + 10, z,V3Zero, kFish, true);
+        }
     });
 }
 

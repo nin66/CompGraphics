@@ -44,6 +44,9 @@ function onDocumentMouseDown(event) {
                 case 'Lobster':
                     document.getElementById('modelinfo').innerHTML = Information.Lobster();
                     break;
+                case 'Fish':
+                    document.getElementById('modelinfo').innerHTML = Information.Fish();
+                    break;
                 case kRocks:
                     document.getElementById('modelinfo').innerHTML = Information.Rocks();
                     break;
