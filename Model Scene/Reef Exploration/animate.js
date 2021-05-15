@@ -27,12 +27,6 @@ function animate() {
 var raycaster = new THREE.Raycaster();
 raycaster.near = 0;
 raycaster.far = 5000;
-//Define a selected object
-//  A flag saying if the object has been selected or not.
-var selectedObject = false;
-
-var geo = new THREE.BoxGeometry();
-var mat = new THREE.MeshBasicMaterial();
 
 //add event listener to the model and move the model with mouse-down position
 function onDocumentMouseDown(event) {
@@ -43,8 +37,29 @@ function onDocumentMouseDown(event) {
     raycaster.setFromCamera(mouse, camera);
     var intersects = raycaster.intersectObjects(scene.children, true);
     if (intersects.length > 0) {    //  RaycastHit = true.
-        if (intersects[0].object.name.length !== 0) {
-            console.log(intersects[0].object.name);
+		if (intersects[0].object.name.length !== 0) {
+            const name = intersects[0].object.name;
+            document.getElementById('modelname').innerHTML = name;
+            switch (name) {
+                case 'Lobster':
+                    document.getElementById('modelinfo').innerHTML = Information.Lobster();
+                    break;
+                case kRocks:
+                    document.getElementById('modelinfo').innerHTML = Information.Rocks();
+                    break;
+                case kCoral:
+                    document.getElementById('modelinfo').innerHTML = Information.Coral();
+                    break;
+                case 'Shells':
+                    document.getElementById('modelinfo').innerHTML = Information.Shells();
+                    break;
+                case 'SeaWeed':
+                    document.getElementById('modelinfo').innerHTML = Information.Seaweed();
+                    break;
+            }
+        } else {
+           document.getElementById('modelname').innerHTML = '';
+           document.getElementById('modelinfo').innerHTML = '';
         }
     }
 }
