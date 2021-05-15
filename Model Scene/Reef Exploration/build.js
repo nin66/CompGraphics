@@ -4,12 +4,14 @@ var GLTFLoader = new THREE.GLTFLoader();
 let mixer = [];
 /** An array of all moveable models. */
 let moveableModels = [];
+var bubbleParticles = []; //array of bubble objects
 
 var V3Zero = new THREE.Vector3(0, 0, 0);
 
 const kRocks = 'Rocks';
 const kCoral = 'Coral';
 const kFish = 'Fish';
+
 
 
 /**
@@ -38,7 +40,7 @@ function loadGLTF(url, x, y, z, normal, name, bMoveable) {
             }
         }
 
-        gltf.scene.traverse(function(o){
+        gltf.scene.traverse(function (o) {
             if (o.isMesh) {
                 o.castShadow = true;
                 o.receiveShadow = true;
@@ -50,7 +52,7 @@ function loadGLTF(url, x, y, z, normal, name, bMoveable) {
         // if (bMoveable) {
         //     moveableModels.push(gltf.scene);
         // }
-        
+
         //  Apply positions.
         gltf.scene.position.x = x;
         gltf.scene.position.y = y;
@@ -103,7 +105,7 @@ function loadGLTFCoral(url, x, y, z, normal, name) {
         }
 
         //  Set the coral's material and colour.
-        gltf.scene.traverse(function(o){
+        gltf.scene.traverse(function (o) {
             if (o.isMesh) {
                 objects.push(o);
                 o.castShadow = true;
@@ -116,7 +118,7 @@ function loadGLTFCoral(url, x, y, z, normal, name) {
             }
         })
 
-        
+
         //  Apply positions.
         gltf.scene.position.x = x;
         gltf.scene.position.y = y;
@@ -148,7 +150,7 @@ function loadGLTFCoral(url, x, y, z, normal, name) {
             else if (random < .75)
                 loadGLTF('models/gltf/Marlin.glb', x, y + 10, z, V3Zero, kFish, true);
             else
-                loadGLTF('models/gltf/Tuna.glb', x, y + 10, z,V3Zero, kFish, true);
+                loadGLTF('models/gltf/Tuna.glb', x, y + 10, z, V3Zero, kFish, true);
         }
     });
 }
@@ -158,6 +160,40 @@ var mesh = null;
 var directionalLight;
 var cameralight;
 var floor = null;
+
+
+function bubble() {
+    //bubbles made using overlaying a plane with a png texture
+    let loader = new THREE.TextureLoader();
+    loader.load("bubble.png", function (texture) {
+        bubbleGeo = new THREE.PlaneBufferGeometry(100, 100);
+        bubbleMaterial = new THREE.MeshLambertMaterial({
+            map: texture,
+            //depthTest: false, //this effect also removes layer overlap of the mesh edges, however depth perception is affected 
+            transparent: true,
+            blending: THREE.AdditiveBlending //allows for better blending effect of transparent pngs
+        });
+
+        for (let p = 0; p < 100; p++) {
+            let bubble = new THREE.Mesh(bubbleGeo, bubbleMaterial);
+            bubble.position.set(
+                Math.random() * 800 - 200,
+                50,
+                Math.random() * 500 - 250
+            );
+            bubble.rotation.x = 0;
+            bubble.rotation.y = 0;
+            bubble.rotation.z = Math.random() * 360;
+            bubble.scale.set(.1, .1, .1);
+            bubble.material.opacity = 0.7;
+            bubbleParticles.push(bubble);
+            scene.add(bubble);
+        }
+    })
+
+}
+
+
 
 function addLight() {
     ambientLight = new THREE.AmbientLight(new THREE.Color(1, 1, 1), .5);

@@ -1,6 +1,11 @@
-
-
 function animate() {
+
+    
+    bubbleParticles.forEach(b => { //bubble animation (spins around z axis)
+        b.position.y+=.07;
+        b.rotation.z-=.02;
+    })
+
     renderer.render(scene, camera);
 
     /** Delta time */

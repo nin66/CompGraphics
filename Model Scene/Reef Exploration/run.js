@@ -4,7 +4,7 @@ setScene();
 addLight();
 createFloor();
 addShapes();
-
+bubble();
 // loadGLTF('models/gltf/Coral.glb'         , -15, 3, -15, new THREE.Vector3(0, 0, 0));
 // loadGLTF('models/gltf/Coral1.glb'        , -10, 3, -15, new THREE.Vector3(0, 0, 0));
 // loadGLTF('models/gltf/Coral2.glb'        , -05, 3, -15, new THREE.Vector3(0, 0, 0));

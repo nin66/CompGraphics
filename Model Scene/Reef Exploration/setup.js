@@ -28,7 +28,7 @@ function setScene() {
 
     scene.fog = new THREE.FogExp2(0x144b6d, 0.003);
     clock = new THREE.Clock();
-    flashlight = new THREE.SpotLight(0xffffff,3, 300, 75, 0.5);
+    flashlight = new THREE.SpotLight(0xffffff,2, 300, 75, 0.5);
     camera.add(flashlight);
     flashlight.position.set(0,0,1);
     flashlight.target = camera;
