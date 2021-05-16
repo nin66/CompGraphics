@@ -57,7 +57,7 @@ function buildGUI() {
         Flashlight : flashlight.visible
     }
 
-    gui.add(params, 'TimeOfDay', 0, 4, .1).onChange(function(rot) {
+    gui.add(params, 'TimeOfDay', 0, 12, .1).onChange(function(rot) {
         // directionalLight.color = Utils.RGB(255 - rot, 255 - rot, 255 - rot);
         // ambientLight.intensity = (rot / 255) * 2;
         directionalLight.position.x = 50 * Math.cos(rot);
