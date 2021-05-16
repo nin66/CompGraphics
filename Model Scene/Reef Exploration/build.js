@@ -1,6 +1,6 @@
 var objects = []; //objects that are draggable, pushed to this array
 var ambientlight;
-var GLTFLoader = new THREE.GLTFLoader();
+var GLTFLoader = new THREE.GLTFLoader(loadingManager);
 let mixer = [];
 /** An array of all moveable models. */
 let moveableModels = [];
@@ -165,12 +165,11 @@ var floor = null;
 
 function bubble() {
     //bubbles made using overlaying a plane with a png texture
-    let loader = new THREE.TextureLoader();
+    let loader = new THREE.TextureLoader(loadingManager);
     loader.load("bubble.png", function (texture) {
-        bubbleGeo = new THREE.PlaneBufferGeometry(100, 100);
+        bubbleGeo = new THREE.PlaneBufferGeometry(30, 30);
         bubbleMaterial = new THREE.MeshLambertMaterial({
             map: texture,
-            //depthTest: false, //this effect also removes layer overlap of the mesh edges, however depth perception is affected 
             transparent: true,
             blending: THREE.AdditiveBlending //allows for better blending effect of transparent pngs
         });
@@ -179,14 +178,14 @@ function bubble() {
             let bubble = new THREE.Mesh(bubbleGeo, bubbleMaterial);
             bubble.position.set(
                 Math.random() * 800 - 200,
-                50,
+                20,
                 Math.random() * 500 - 250
             );
             bubble.rotation.x = 0;
             bubble.rotation.y = 0;
             bubble.rotation.z = Math.random() * 360;
             bubble.scale.set(.1, .1, .1);
-            bubble.material.opacity = 0.7;
+            bubble.material.opacity = 0.4;
             bubbleParticles.push(bubble);
             scene.add(bubble);
         }
