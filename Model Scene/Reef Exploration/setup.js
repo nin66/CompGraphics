@@ -10,8 +10,19 @@ var flashlight;
 var gui;
 var dragControls;
 
+const loadingManager = new THREE.LoadingManager( () => {
+	
+    const loadingScreen = document.getElementById( 'loading-screen' );
+    loadingScreen.classList.add( 'fade-out' );
+    
+    // optional: remove loader from DOM via event listener
+    loadingScreen.addEventListener( 'transitionend', onTransitionEnd );
+    
+} );
+
 //Setup the 3 main components: scene, camera, renderer
 function setScene() {
+    
     scene = new THREE.Scene();
     var ratio = window.innerWidth / window.innerHeight;
     camera = new THREE.PerspectiveCamera(45, ratio, 0.1, 5000);
@@ -50,4 +61,10 @@ function clearScene() {
     for (let i = scene.children.length - 1; i >= 0; i--)
         if (scene.children[i].type === "Mesh")
             scene.remove(scene.children[i]);
+}
+
+function onTransitionEnd( event ) {
+
+	event.target.remove();
+	
 }
