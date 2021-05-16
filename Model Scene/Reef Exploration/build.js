@@ -11,7 +11,8 @@ var V3Zero = new THREE.Vector3(0, 0, 0);
 const kRocks = 'Rocks';
 const kCoral = 'Coral';
 const kFish = 'Fish';
-
+const kShells = 'Shells';
+const kSeaweed = 'SeaWeed';
 
 
 /**

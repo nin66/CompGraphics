@@ -58,10 +58,10 @@ function onDocumentMouseDown(event) {
                 case kCoral:
                     document.getElementById('modelinfo').innerHTML = Information.Coral();
                     break;
-                case 'Shells':
+                case kShells:
                     document.getElementById('modelinfo').innerHTML = Information.Shells();
                     break;
-                case 'SeaWeed':
+                case kSeaweed:
                     document.getElementById('modelinfo').innerHTML = Information.Seaweed();
                     break;
             }
