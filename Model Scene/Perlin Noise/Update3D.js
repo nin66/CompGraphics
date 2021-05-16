@@ -86,9 +86,7 @@ function UpdatePlane() {
 
                     var normal = face.normal;
                     if (normal !== null) {
-                        /*if (modelIndex == 0) {
-                            loadGLTF('models/gltf/Rocks.glb', v[i+1], v[i+2], v[i], normal, kRocks, false);
-                        } else */if (modelIndex == 1) {
+                        if (modelIndex == 1) {
                             loadGLTF('models/gltf/Shells.glb', v[i+1], v[i+2], v[i], normal, kShells, false);
                         } else if (modelIndex == 2) {
                             loadGLTF('models/gltf/Rocks1.glb', v[i+1], v[i+2], v[i], normal, kRocks, false);

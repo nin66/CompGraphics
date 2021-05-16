@@ -1,17 +1,8 @@
 
 
+//  Utils module for Group 87, Assignment 4.
+
 function A4(){
-
-    this.addCube = function(x, y, z){
-        var cube_geo = new THREE.BoxGeometry(1, 1, 1);
-        var cube_material = new THREE.MeshBasicMaterial();
-        cube_material.color = new THREE.Color(0, 1, 0);
-        cube_material.wireframe = true;
-        var cube = new THREE.Mesh(cube_geo, cube_material);
-
-        cube.position.set(x, y, z);
-        scene.add(cube);
-    }
 
     this.random = function(min, max){
         return Math.random() * (max - min) + min;

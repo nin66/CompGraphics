@@ -11,14 +11,6 @@ var offsetDeltaX, offsetDeltaY;
 
 var PerlinGeometry, Perlin_Material, Perlin_Mesh;
 
-var sea, sea_material, sea_mesh;
-
-var wavesSpeedX = 0, wavesSpeedY = 0;
-var waveHeight;
-
-var treeMxN, currentTrees;
-var allTrees = [];
-
 Start();
 
 //  Called before the first frame.
@@ -37,12 +29,4 @@ function Start(){
 
     offsetDeltaX = .025;
     offsetDeltaY = .025;
-    
-    //const points = [];
-
-    //  Maximum number of Trees.
-    treeMxN = 50;
-    currentTrees = 0;
-    
-    //OnGUI();
 }

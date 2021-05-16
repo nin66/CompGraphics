@@ -14,7 +14,6 @@ const kFish = 'Fish';
 const kShells = 'Shells';
 const kSeaweed = 'SeaWeed';
 
-
 /**
  * Loads a GLTF model from url into the scene at x, y and z on a normal.
  * @param { string } url The URL of the model.
@@ -50,9 +49,9 @@ function loadGLTF(url, x, y, z, normal, name, bMoveable) {
             }
         });
 
-        // if (bMoveable) {
-        //     moveableModels.push(gltf.scene);
-        // }
+        if (bMoveable) {
+            moveableModels.push(gltf.scene);
+        }
 
         //  Apply positions.
         gltf.scene.position.x = x;
@@ -193,8 +192,6 @@ function bubble() {
 
 }
 
-
-
 function addLight() {
     ambientLight = new THREE.AmbientLight(new THREE.Color(1, 1, 1), .5);
     directionalLight = new THREE.DirectionalLight(new THREE.Color(1, 1, 1), .5);
@@ -214,7 +211,6 @@ function createFloor() {
 
 //Add all shapes to the scene
 function addShapes() {
-    // scene.add(floor);
     scene.add(camera);
     scene.add(ambientLight);
     scene.add(directionalLight);

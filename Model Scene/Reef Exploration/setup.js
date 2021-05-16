@@ -74,13 +74,6 @@ var resizeScene = function () {
     renderer.render(scene, camera);
 };
 
-function clearScene() {
-    for (let i = scene.children.length - 1; i >= 0; i--)
-        if (scene.children[i].type === "Mesh")
-            scene.remove(scene.children[i]);
-}
-
-
 function onTransitionEnd(event) {
 
     event.target.remove();
