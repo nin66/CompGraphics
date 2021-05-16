@@ -2,6 +2,7 @@
 
 const upNormal = new THREE.Vector3(0, 1, 0);
 let modelIndex = 0;
+let coralIndex = 0;
 
 //  Updates the plane's attributes.
 function UpdatePlane() {
@@ -35,8 +36,47 @@ function UpdatePlane() {
             var targetColour = Utils.RGB(232, 227, 174);
             var colour = new THREE.Color();
             colour.lerpColors(startColour, targetColour, Perlin);     //  Interpolate colour based on Perlin Noise.
-            colours.push(colour.r, colour.g, colour.b);
+			colours.push(colour.r, colour.g, colour.b);
+        }
 
+        var bCoralPlaced = false;
+
+        if (Math.random() < .0023) {
+            var ray = new THREE.Raycaster(new THREE.Vector3(v[i], v[i+1] + 5, v[i+2]), new THREE.Vector3(0,-1,0), 0, 10);
+            var intersects = ray.intersectObjects(scene.children);
+            if (intersects.length > 0) {
+                var face = intersects[0].face;
+                if (face === null) { continue; }    //  Pass if there is no terrain underneath.
+
+                var normal = face.normal;
+                if (normal !== null) {
+                    if (coralIndex == 0) {
+                        loadGLTFCoral('models/gltf/Coral.glb', v[i + 1], v[i + 2], v[i], normal, kCoral, false);
+                    } else if (coralIndex == 1) {
+                        loadGLTFCoral('models/gltf/Coral1.glb', v[i + 1], v[i + 2], v[i], normal, kCoral, false);
+                    } else if (coralIndex == 2) {
+                        loadGLTFCoral('models/gltf/Coral2.glb', v[i + 1], v[i + 2], v[i], normal, kCoral, false);
+                    } else if (coralIndex == 3) {
+                        loadGLTFCoral('models/gltf/Coral3.glb', v[i + 1], v[i + 2], v[i], normal, kCoral, false);
+                    } else if (coralIndex == 4) {
+                        loadGLTFCoral('models/gltf/Coral4.glb', v[i + 1], v[i + 2], v[i], normal, kCoral, false);
+                    } else if (coralIndex == 5) {
+                        loadGLTFCoral('models/gltf/Coral5.glb', v[i + 1], v[i + 2], v[i], normal, kCoral, false);
+                    } else if (coralIndex == 6) {
+                        loadGLTFCoral('models/gltf/Coral6.glb', v[i + 1], v[i + 2], v[i], normal, kCoral, false);
+                    } else if (coralIndex == 7) {
+                        loadGLTF('models/gltf/SeaWeed.glb', v[i+1], v[i+2], v[i], normal, 'SeaWeed', false);
+                    }
+
+                    coralIndex++;
+                    coralIndex %= 8;
+    
+                    bCoralPlaced = true;
+                }
+            }
+        }
+
+        if (!bCoralPlaced) {
             if (Math.random() < .0023) {
                 var ray = new THREE.Raycaster(new THREE.Vector3(v[i], v[i+1] + 5, v[i+2]), new THREE.Vector3(0,-1,0), 0, 10);
                 var intersects = ray.intersectObjects(scene.children);
@@ -46,52 +86,38 @@ function UpdatePlane() {
 
                     var normal = face.normal;
                     if (normal !== null) {
-                        if (modelIndex == 0) {
-                            loadGLTF('models/gltf/Rocks.glb', v[i+1], v[i+2], v[i], normal);
-                        } else if (modelIndex == 1) {
-                            loadGLTFCoral('models/gltf/Coral.glb', v[i+1], v[i+2], v[i], normal);
+                        if (modelIndex == 1) {
+                            loadGLTF('models/gltf/Shells.glb', v[i+1], v[i+2], v[i], normal, kShells, false);
                         } else if (modelIndex == 2) {
-                            loadGLTFCoral('models/gltf/Coral1.glb', v[i+1], v[i+2], v[i], normal);
+                            loadGLTF('models/gltf/Rocks1.glb', v[i+1], v[i+2], v[i], normal, kRocks, false);
                         } else if (modelIndex == 3) {
-                            loadGLTFCoral('models/gltf/Coral2.glb', v[i+1], v[i+2], v[i], normal);
+                            loadGLTF('models/gltf/Rocks2.glb', v[i+1], v[i+2], v[i], normal, kRocks, false);
                         } else if (modelIndex == 4) {
-                            loadGLTFCoral('models/gltf/Coral3.glb', v[i+1], v[i+2], v[i], normal);
+                            loadGLTF('models/gltf/Rocks3.glb', v[i+1], v[i+2], v[i], normal, kRocks, false);
                         } else if (modelIndex == 5) {
-                            loadGLTFCoral('models/gltf/Coral4.glb', v[i+1], v[i+2], v[i], normal);
+                            loadGLTF('models/gltf/Rocks4.glb', v[i+1], v[i+2], v[i], normal, kRocks, false);
                         } else if (modelIndex == 6) {
-                            loadGLTFCoral('models/gltf/Coral5.glb', v[i+1], v[i+2], v[i], normal);
+                            loadGLTF('models/gltf/Rocks5.glb', v[i+1], v[i+2], v[i], normal, kRocks, false);
                         } else if (modelIndex == 7) {
-                            loadGLTFCoral('models/gltf/Coral6.glb', v[i+1], v[i+2], v[i], normal);
+                            loadGLTF('models/gltf/Rocks6.glb', v[i+1], v[i+2], v[i], normal, kRocks, false);
                         } else if (modelIndex == 8) {
-                            loadGLTF('models/gltf/Shells.glb', v[i+1], v[i+2], v[i], normal);
+                            loadGLTF('models/gltf/Rocks7.glb', v[i+1], v[i+2], v[i], normal, kRocks, false);
                         } else if (modelIndex == 9) {
-                            loadGLTF('models/gltf/Rocks1.glb', v[i+1], v[i+2], v[i], normal);
+                            loadGLTF('models/gltf/Rocks8.glb', v[i+1], v[i+2], v[i], normal, kRocks, false);
                         } else if (modelIndex == 10) {
-                            loadGLTF('models/gltf/Rocks2.glb', v[i+1], v[i+2], v[i], normal);
+                            loadGLTF('models/gltf/Rocks9.glb', v[i+1], v[i+2], v[i], normal, kRocks, false);
                         } else if (modelIndex == 11) {
-                            loadGLTF('models/gltf/Rocks3.glb', v[i+1], v[i+2], v[i], normal);
+                            loadGLTF('models/gltf/Rocks10.glb', v[i+1], v[i+2] + 1, v[i], normal, kRocks, false);  //  These models are so small that they are added in under the terrain and need to be pushed upwards.
                         } else if (modelIndex == 12) {
-                            loadGLTF('models/gltf/Rocks4.glb', v[i+1], v[i+2], v[i], normal);
+                            loadGLTF('models/gltf/Rocks11.glb', v[i+1], v[i+2] + 1, v[i], normal, kRocks, false);  //  These models are so small that they are added in under the terrain and need to be pushed upwards.
                         } else if (modelIndex == 13) {
-                            loadGLTF('models/gltf/Rocks5.glb', v[i+1], v[i+2], v[i], normal);
-                        } else if (modelIndex == 16) {
-                            loadGLTF('models/gltf/Rocks6.glb', v[i+1], v[i+2], v[i], normal);
-                        } else if (modelIndex == 17) {
-                            loadGLTF('models/gltf/Rocks7.glb', v[i+1], v[i+2], v[i], normal);
-                        } else if (modelIndex == 18) {
-                            loadGLTF('models/gltf/Rocks8.glb', v[i+1], v[i+2], v[i], normal);
-                        } else if (modelIndex == 19) {
-                            loadGLTF('models/gltf/Rocks9.glb', v[i+1], v[i+2], v[i], normal);
-                        } else if (modelIndex == 20) {
-                            loadGLTF('models/gltf/Rocks10.glb', v[i+1], v[i+2] + 1, v[i], normal);  //  These models are so small that they are added in under the terrain and need to be pushed upwards.
-                        } else if (modelIndex == 21) {
-                            loadGLTF('models/gltf/Rocks11.glb', v[i+1], v[i+2] + 1, v[i], normal);  //  These models are so small that they are added in under the terrain and need to be pushed upwards.
-                        } else if (modelIndex == 22) {
-                            loadGLTF('models/gltf/Rocks12.glb', v[i+1], v[i+2], v[i], normal);
+                            loadGLTF('models/gltf/Rocks12.glb', v[i+1], v[i+2], v[i], normal, kRocks, false);
+                        } else if (modelIndex == 14) {
+                            loadGLTF('models/gltf/SeaWeed.glb', v[i+1], v[i+2], v[i], normal, kSeaweed, false);
                         }
 
                         modelIndex++;
-                        modelIndex %= 23;
+                        modelIndex %= 15;
                     }
                 }
             }

@@ -1,10 +1,21 @@
-
-
 function animate() {
-    renderer.render(scene, camera);
 
     /** Delta time */
-    var delta = clock.getDelta();
+    delta = clock.getDelta();
+    time += delta;
+
+
+    bubbleParticles.forEach(b => { //bubble animation (spins around z axis)
+        b.position.addScaledVector(direction, speed * delta);
+        b.position.y+=.07;
+        b.rotation.z-=.02;
+        if (b.position.y >= 800) {
+            b.position.y = 100;
+        } else {
+        }
+    });
+
+    renderer.render(scene, camera);
 
     mixer.forEach(function (call){
         call.update(delta);
@@ -25,38 +36,44 @@ function animate() {
 
 //Define a raycaster from THREE to apply for intersected objects
 var raycaster = new THREE.Raycaster();
-//Define a selected object
-//  A flag saying if the object has been selected or not.
-var selectedObject = false;
+raycaster.near = 0;
+raycaster.far = 5000;
 
 //add event listener to the model and move the model with mouse-down position
 function onDocumentMouseDown(event) {
     var mouse = new THREE.Vector2();
-    mouse.x = (event.clientX / renderer.domElement.clientWidth) * 2 - 1
-    mouse.y = (event.clientY / renderer.domElement.clientHeight) * 2 - 1;
+    mouse.x = (event.clientX / window.innerWidth) * 2 - 1
+    mouse.y = -(event.clientY / window.innerHeight) * 2 + 1;
 
     raycaster.setFromCamera(mouse, camera);
-
-    var intersects = raycaster.intersectObjects(scene.children, false);
-    
+    var intersects = raycaster.intersectObjects(scene.children, true);
     if (intersects.length > 0) {    //  RaycastHit = true.
-        //  If we selected the model.
-        if ((intersects[0].object.name === 'Loaded Mesh') && !selectedObject){
-            intersects[0].object.material.color = new THREE.Color(1, 1.5, .155);
-            console.log("moised");
-            selectedObject = true;
-        }
-
-        //  If model is not selected or dropped.
-        if ((intersects[0].object.name !== 'Loaded Mesh') && selectedObject){
-            mesh.material.color = new THREE.Color(.6, .2, .4);
-
-            var pos = intersects[0].point;
-
-            mesh.position.x = pos.x;
-            mesh.position.y = -pos.y;
-
-            selectedObject = false;
+		if (intersects[0].object.name.length !== 0) {
+            const name = intersects[0].object.name;
+            document.getElementById('modelname').innerHTML = name;
+            switch (name) {
+                case 'Lobster':
+                    document.getElementById('modelinfo').innerHTML = Information.Lobster();
+                    break;
+                case 'Fish':
+                    document.getElementById('modelinfo').innerHTML = Information.Fish();
+                    break;
+                case kRocks:
+                    document.getElementById('modelinfo').innerHTML = Information.Rocks();
+                    break;
+                case kCoral:
+                    document.getElementById('modelinfo').innerHTML = Information.Coral();
+                    break;
+                case kShells:
+                    document.getElementById('modelinfo').innerHTML = Information.Shells();
+                    break;
+                case kSeaweed:
+                    document.getElementById('modelinfo').innerHTML = Information.Seaweed();
+                    break;
+            }
+        } else {
+           document.getElementById('modelname').innerHTML = '';
+           document.getElementById('modelinfo').innerHTML = '';
         }
     }
 }

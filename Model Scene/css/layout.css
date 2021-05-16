@@ -1,6 +1,5 @@
 /* 
-    Created on : 04/03/2020, 3:08:18 PM
-    Author     : george
+    Authors     : Group 87 Autumn 2021 INTRODUCTION TO COMPUTER GRAPHICS
 */
 
 canvas {
@@ -9,7 +8,7 @@ canvas {
 }
 
 body {
-    font-family: Monospace;
+    font-family: 'Roboto', sans-serif;
     margin: 0px;
     overflow: hidden;
 }
@@ -29,4 +28,197 @@ h1 {
     width: 100%;
     padding: 10px 5px;
     margin-top: auto;
+}
+
+.informationbox {
+    text-align: center;
+    color : white;
+}
+
+#modelname {
+    position : absolute;
+    bottom : 10%;
+    width : 100%;
+    text-align : center;
+    font-size : 50px;
+}
+
+.modelname {
+    text-align: center;
+    text-transform: uppercase;
+
+    padding-top: 1%;
+    padding-bottom: 1%;
+}
+
+#modelinfo {
+    position : absolute;
+    bottom : 5%;
+    width : 100%;
+    text-align : center;
+    font-size : 25px;
+}
+
+.modelinfo {
+    text-align: center;
+    position: relative;
+
+
+    padding-bottom: 0%;
+    padding-top: 10%;
+
+    font-weight: 200;
+    font-size: 100%;
+}
+
+#modelname {
+    text-align : center;
+}
+
+#modelinfo {
+    text-align : center;
+    top : 85%;
+    bottom : 5%;
+    color : white;
+}
+
+/*//////////////////////////////////////////////////////////////////////////////////////////////////////////////*/
+
+
+/* PARAGRAPH AND TEXT STYLES */
+
+.basicHead {
+    color: #1FBEB9;
+    text-transform: uppercase;
+    bottom : 10%;
+}
+
+.simplePara{
+  position: relative;
+
+  font-size: 40%;
+}
+
+.C{
+  text-align: center;
+
+  list-style-type: none;
+}
+
+.cap{
+  text-transform: uppercase;
+}
+
+.bold{
+  font-weight: 500;
+}
+
+.link{
+  text-decoration: none;
+
+  color: #00ACA7; /* FROM THE PETRONAS LOGO */
+}
+
+.botspace {
+  padding-bottom: 2.5%;
+}
+
+
+/* loading screen */
+
+#loading-screen {
+	position: absolute;
+	z-index: 2;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background-color: #000000;
+	opacity: 1;
+ 	transition: 1s opacity;
+}
+
+#loading-screen.fade-out {
+    opacity: 0;
+}
+
+#loading-screen {
+	position: absolute;
+	z-index: 2;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background-color: #000000;
+	opacity: 1;
+ 	transition: 1s opacity;
+}
+
+#loading-screen.fade-out {
+    opacity: 0;
+}
+
+#loader {
+    display: block;
+    position: relative;
+    left: 50%;
+    top: 50%;
+    width: 150px;
+    height: 150px;
+    margin: -75px 0 0 -75px;
+    border-radius: 50%;
+    border: 3px solid transparent;
+    border-top-color: #8ec9f1;
+    -webkit-animation: spin 2s linear infinite;
+    animation: spin 2s linear infinite;
+}
+#loader:before {
+    content: "";
+    position: absolute;
+    top: 5px;
+    left: 5px;
+    right: 5px;
+    bottom: 5px;
+    border-radius: 50%;
+    border: 3px solid transparent;
+    border-top-color: #5577d3;
+    -webkit-animation: spin 3s linear infinite;
+    animation: spin 3s linear infinite;
+}
+#loader:after {
+    content: "";
+    position: absolute;
+    top: 15px;
+    left: 15px;
+    right: 15px;
+    bottom: 15px;
+    border-radius: 50%;
+    border: 3px solid transparent;
+    border-top-color: #3700ff;
+    -webkit-animation: spin 1.5s linear infinite;
+    animation: spin 1.5s linear infinite;
+}
+@-webkit-keyframes spin {
+    0%   {
+        -webkit-transform: rotate(0deg);
+        -ms-transform: rotate(0deg);
+        transform: rotate(0deg);
+    }
+    100% {
+        -webkit-transform: rotate(360deg);
+        -ms-transform: rotate(360deg);
+        transform: rotate(360deg);
+    }
+}
+@keyframes spin {
+    0%   {
+        -webkit-transform: rotate(0deg);
+        -ms-transform: rotate(0deg);
+        transform: rotate(0deg);
+    }
+    100% {
+        -webkit-transform: rotate(360deg);
+        -ms-transform: rotate(360deg);
+        transform: rotate(360deg);
+    }
 }
