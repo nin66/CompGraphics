@@ -1,15 +1,21 @@
 function animate() {
 
-    
+    /** Delta time */
+    delta = clock.getDelta();
+    time += delta;
+
+
     bubbleParticles.forEach(b => { //bubble animation (spins around z axis)
+        b.position.addScaledVector(direction, speed * delta);
         b.position.y+=.07;
         b.rotation.z-=.02;
-    })
+        if (b.position.y >= 800) {
+            b.position.y = 100;
+        } else {
+        }
+    });
 
     renderer.render(scene, camera);
-
-    /** Delta time */
-    var delta = clock.getDelta();
 
     mixer.forEach(function (call){
         call.update(delta);

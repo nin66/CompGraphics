@@ -96,7 +96,7 @@ h1 {
 .simplePara{
   position: relative;
 
-  font-size: 50%;
+  font-size: 40%;
 }
 
 .C{
@@ -168,7 +168,7 @@ h1 {
     margin: -75px 0 0 -75px;
     border-radius: 50%;
     border: 3px solid transparent;
-    border-top-color: #70b0db;
+    border-top-color: #8ec9f1;
     -webkit-animation: spin 2s linear infinite;
     animation: spin 2s linear infinite;
 }

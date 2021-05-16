@@ -169,7 +169,6 @@ function bubble() {
         bubbleGeo = new THREE.PlaneBufferGeometry(30, 30);
         bubbleMaterial = new THREE.MeshLambertMaterial({
             map: texture,
-            
             transparent: true,
             blending: THREE.AdditiveBlending //allows for better blending effect of transparent pngs
         });
