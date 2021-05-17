@@ -16,10 +16,10 @@ var speed = 0.5; // units a second
 
 const loadingManager = new THREE.LoadingManager(() => {
 
-    const loadingScreen = document.getElementById('loading-screen');
+    const loadingScreen = document.getElementById('loading-screen'); //call css design style
     loadingScreen.classList.add('fade-out');
 
-    // optional: remove loader from DOM via event listener
+    //remove loader from DOM via event listener
     loadingScreen.addEventListener('transitionend', onTransitionEnd);
 
 });
@@ -35,7 +35,6 @@ function setScene() {
     renderer = new THREE.WebGLRenderer();
     renderer.setSize(window.innerWidth, window.innerHeight);
     document.body.appendChild(renderer.domElement);
-    // controls = new THREE.OrbitControls(camera, renderer.domElement);
     dragControls = new THREE.DragControls(objects, camera, renderer.domElement);
     const loader = new THREE.TextureLoader();
     const bgTexture = loader.load('bg2.png');

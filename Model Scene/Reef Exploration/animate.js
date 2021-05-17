@@ -25,7 +25,7 @@ function animate() {
         // Where to access all moveable models.
         // E.g.,
         // console.log(model);
-        // model.position.x += 1 * delta;
+        model.position.z -= 2 * delta;
         // console.log(model.position);
     });
     
