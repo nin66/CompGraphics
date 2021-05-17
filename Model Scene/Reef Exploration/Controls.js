@@ -46,8 +46,6 @@ document.onmousemove = function(event) {
 
     //  X-Axis and Y-Axis boundaries according to screen space.
     //  Value between -1 and +1.
-    cursor.x = 2 * (event.clientX / window.innerWidth) - 1;
-    cursor.y = 2 * (event.clientY / window.innerHeight) - 1;
     azimuth = event.clientX;
     inclination = event.clientY;
     cursor.x = (event.clientX / window.innerWidth) * 2 - 1;
@@ -64,8 +62,10 @@ function UpdateControls() {
         prevAzimuth = azimuth;
         prevInclination = inclination;
 
+        //  Azimuth
         RotateRelativeTo(camera, new THREE.Vector3(0,1,0), -0.002 * deltaAzimuth)
 
+        //  Inclination
         camera.rotateOnAxis (new THREE.Vector3(1,0,0), -0.002 * deltaInclination);
     }
 
@@ -80,10 +80,7 @@ function UpdateControls() {
 function RotateRelativeTo(relativeTo, axis, radians) {
     var q = new THREE.Quaternion();
 
-    if (axis.length() != 1) {
-        console.warn("Ensure that the input axis : Vector3 is normalised.");
-        axis.normalize();
-    }
+    axis.normalize();
 
     q.setFromAxisAngle(axis, radians);
     relativeTo.quaternion.multiplyQuaternions(q, relativeTo.quaternion);
