@@ -13,6 +13,19 @@ const kCoral = 'Coral';
 const kFish = 'Fish';
 const kShells = 'Shells';
 const kSeaweed = 'SeaWeed';
+const kStarFish = 'Sea Star';
+const kCrab = 'Crab';
+const kDolphin = 'Dolphin';
+const kEel = 'Eel';
+const kHammerhead = 'Hammerhead';
+const kLobster = 'Lobster';
+const kOctopus = 'Octopus';
+const kSeal = 'Seal';
+const kShark = 'Shark';
+const kSquid = 'Squid';
+const kStingray = 'Stingray';
+const kTurtle = 'Turtle';
+const kWhale = 'Whale';
 
 /**
  * Loads a GLTF model from url into the scene at x, y and z on a normal.

@@ -9,12 +9,10 @@ let corals = [
     {'model': 'models/gltf/Coral3.glb', 'type': kCoral},
     {'model': 'models/gltf/Coral4.glb', 'type': kCoral},
     {'model': 'models/gltf/Coral5.glb', 'type': kCoral},
-    {'model': 'models/gltf/Coral6.glb', 'type': kCoral},
-    {'model': 'models/gltf/SeaWeed.glb', 'type': kSeaweed}
+    {'model': 'models/gltf/Coral6.glb', 'type': kCoral}
 
 ]
 let models = [
-    {'model': 'models/gltf/Rocks.glb', 'type': kRocks},
     {'model': 'models/gltf/Rocks1.glb', 'type': kRocks},
     {'model': 'models/gltf/Rocks2.glb', 'type': kRocks},
     {'model': 'models/gltf/Rocks3.glb', 'type': kRocks},
@@ -27,23 +25,23 @@ let models = [
     {'model': 'models/gltf/Rocks11.glb', 'type': kRocks},
     {'model': 'models/gltf/Rocks12.glb', 'type': kRocks},
     {'model': 'models/gltf/Shells.glb', 'type': kShells},
+    {'model': 'models/gltf/SeaWeed.glb', 'type': kSeaweed}
 ]
 let movable = [ 
-    {'model': 'models/gltf/Crab.glb', 'type': 'Crab'},
-    {'model': 'models/gltf/Dolphin.glb', 'type': 'Dolphin'},
-    {'model': 'models/gltf/Eel.glb', 'type': 'Eel'},
-    {'model': 'models/gltf/Fish.glb', 'type': 'Fish'},
-    {'model': 'models/gltf/Hammerhead.glb', 'type': 'Hammerhead'},
-    {'model': 'models/gltf/Lobster.glb', 'type': 'Lobster'},
-    {'model': 'models/gltf/Octopus.glb', 'type': 'Octopus'},
-    {'model': 'models/gltf/Seal.glb', 'type': 'Seal'},
-    {'model': 'models/gltf/Shark.glb', 'type': 'Shark'},
-    {'model': 'models/gltf/Squid.glb', 'type': 'Squid'},
-    {'model': 'models/gltf/StarFish.glb', 'type': 'StarFish'},
-    {'model': 'models/gltf/StingRay.glb', 'type': 'StingRay'},
-    {'model': 'models/gltf/Turtle.glb', 'type': 'Turtle'},
-    {'model': 'models/gltf/Whale.glb', 'type': 'Whale'},
-    {'model': 'models/gltf/Lobster.glb', 'type': 'Lobster'},
+    {'model': 'models/gltf/Crab.glb', 'type': kCrab},
+    {'model': 'models/gltf/Dolphin.glb', 'type': kDolphin},
+    {'model': 'models/gltf/Eel.glb', 'type': kEel},
+    {'model': 'models/gltf/Fish.glb', 'type': kFish},
+    {'model': 'models/gltf/Hammerhead.glb', 'type': kHammerhead},
+    {'model': 'models/gltf/Lobster.glb', 'type': kLobster},
+    {'model': 'models/gltf/Octopus.glb', 'type': kOctopus},
+    {'model': 'models/gltf/Seal.glb', 'type': kSeal},
+    {'model': 'models/gltf/Shark.glb', 'type': kShark},
+    {'model': 'models/gltf/Squid.glb', 'type': kSquid},
+    {'model': 'models/gltf/StarFish.glb', 'type': kStarFish},
+    {'model': 'models/gltf/StingRay.glb', 'type': kStingray},
+    {'model': 'models/gltf/Turtle.glb', 'type': kTurtle},
+    {'model': 'models/gltf/Whale.glb', 'type': kWhale}
 ]
 const upNormal = new THREE.Vector3(0, 1, 0);
 

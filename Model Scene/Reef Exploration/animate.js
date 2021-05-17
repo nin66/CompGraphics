@@ -52,10 +52,10 @@ function onDocumentMouseDown(event) {
             const name = intersects[0].object.name;
             document.getElementById('modelname').innerHTML = name;
             switch (name) {
-                case 'Lobster':
+                case kLobster:
                     document.getElementById('modelinfo').innerHTML = Information.Lobster();
                     break;
-                case 'Fish':
+                case kFish:
                     document.getElementById('modelinfo').innerHTML = Information.Fish();
                     break;
                 case kRocks:
@@ -69,6 +69,42 @@ function onDocumentMouseDown(event) {
                     break;
                 case kSeaweed:
                     document.getElementById('modelinfo').innerHTML = Information.Seaweed();
+                    break;
+                case kStarFish:
+                    document.getElementById('modelinfo').innerHTML = Information.StarFish();
+                    break;
+                case kCrab:
+                    document.getElementById('modelinfo').innerHTML = Information.Crab();
+                    break;
+                case kDolphin:
+                    document.getElementById('modelinfo').innerHTML = Information.Dolphin();
+                    break;
+                case kEel:
+                    document.getElementById('modelinfo').innerHTML = Information.Eel();
+                    break;
+                case kHammerhead:
+                    document.getElementById('modelinfo').innerHTML = Information.Hammerhead();
+                    break;
+                case kOctopus:
+                    document.getElementById('modelinfo').innerHTML = Information.Octopus();
+                    break;
+                case kSeal:
+                    document.getElementById('modelinfo').innerHTML = Information.Seal();
+                    break;
+                case kShark:
+                    document.getElementById('modelinfo').innerHTML = Information.Shark();
+                    break;
+                case kSquid:
+                    document.getElementById('modelinfo').innerHTML = Information.Squid();
+                    break;
+                case kStingray:
+                    document.getElementById('modelinfo').innerHTML = Information.Stingray();
+                    break;
+                case kTurtle:
+                    document.getElementById('modelinfo').innerHTML = Information.Turtle();
+                    break;
+                case kWhale:
+                    document.getElementById('modelinfo').innerHTML = Information.Whale();
                     break;
             }
         } else {
