@@ -96,7 +96,7 @@ function UpdatePlane() {
                     if(coralIndex >= corals.length){
                         coralIndex = 0;
                     }
-                    loadGLTF(corals[coralIndex]['model'], v[i+1], v[i+2], v[i], normal, corals[coralIndex]['type'], false);
+                    loadGLTFCoral(corals[coralIndex]['model'], v[i+1], v[i+2], v[i], normal, corals[coralIndex]['type']);
                     coralIndex++;
     
                     bCoralPlaced = true;
