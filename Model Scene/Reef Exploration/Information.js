@@ -6,6 +6,8 @@
 class Information {
 
     static lobster = [
+        "Lobster is a generic term for species belonging to the Prickly Pear family of the Crawfish suborder, and is a crayfish that lives in the sea.",
+        "It is a crustacean animal with prominent claws and a hard shell, and its tail is webbed and spreads like a fin on the back, which is advantageous for movement.",
         "Lobsters taste with their legs and chew with their stomachs.",
         "A group of Lobsters is called a risk.",
         "Lobsters are closely related to Grasshoppers and Tarantulas.",
@@ -38,6 +40,7 @@ class Information {
     }
 
     static coral = [
+        "It is a generic term for an animal belonging to the coral genus of the coral reef. It is hermaphrodite. ",
         "A quarter of all marine species live on coral reefs.",
         "Corals are animals, not plants.",
         "Coral reefs date back around 240 million years.",
@@ -107,7 +110,8 @@ class Information {
         "There are over 2,000 species of Sea Stars.",
         "Sea Stars cannot survive in fresh water.",
         "Sunflower Sea Stars can have up to 24 arms.<br>They have the most arms of any species on Earth.",
-        "A group of Sea Stars are called a constellation."
+        "A group of Sea Stars are called a constellation.",
+        "The fact that many starfish first appeared during the Great Cambrian explosion, 500 million years ago. "
     ]
     
     static nStarfish = 0;
