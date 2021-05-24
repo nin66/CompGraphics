@@ -125,7 +125,7 @@ function loadGLTFCoral(url, x, y, z, normal, name) {
                 o.receiveShadow = true;
                 o.scale.set(2, 2, 2);
                 o.material = new THREE.MeshStandardMaterial();
-                o.material.emissive = new THREE.Color(Math.random(), Math.random(), Math.random());
+                o.material.color = new THREE.Color(0xFFFFFF * Math.random());
 
                 o.name = name;
             }
@@ -209,6 +209,7 @@ function addLight() {
     ambientLight = new THREE.AmbientLight(new THREE.Color(1, 1, 1), .5);
     directionalLight = new THREE.DirectionalLight(new THREE.Color(1, 1, 1), .5);
     directionalLight.position.set(0, 0, 0);
+    directionalLight.castShadow = true;
 }
 
 //Create floor

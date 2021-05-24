@@ -80,8 +80,6 @@ function UpdatePlane() {
 			colours.push(colour.r, colour.g, colour.b);
         }
 
-        var bCoralPlaced = false;
-
         if (Math.random() < .0023) {
             var ray = new THREE.Raycaster(new THREE.Vector3(v[i], v[i+1] + 5, v[i+2]), new THREE.Vector3(0,-1,0), 0, 10);
             var intersects = ray.intersectObjects(scene.children);
@@ -96,31 +94,32 @@ function UpdatePlane() {
                     }
                     loadGLTFCoral(corals[coralIndex]['model'], v[i+1], v[i+2], v[i], normal, corals[coralIndex]['type']);
                     coralIndex++;
-    
-                    bCoralPlaced = true;
+
+                    continue;
                 }
             }
         }
 
-        if (!bCoralPlaced) {
-            if (Math.random() < .0023) {
-                var ray = new THREE.Raycaster(new THREE.Vector3(v[i], v[i+1] + 5, v[i+2]), new THREE.Vector3(0,-1,0), 0, 10);
-                var intersects = ray.intersectObjects(scene.children);
-                if (intersects.length > 0) {
-                    var face = intersects[0].face;
-                    if (face === null) { continue; }    //  Pass if there is no terrain underneath.
+        if (Math.random() < .0023) {
+            var ray = new THREE.Raycaster(new THREE.Vector3(v[i], v[i+1] + 5, v[i+2]), new THREE.Vector3(0,-1,0), 0, 10);
+            var intersects = ray.intersectObjects(scene.children);
+            if (intersects.length > 0) {
+                var face = intersects[0].face;
+                if (face === null) { continue; }    //  Pass if there is no terrain underneath.
 
-                    var normal = face.normal;
-                    if (normal !== null) {
-                        if(modelIndex >= models.length){
-                            modelIndex = 0;
-                        }
-                        loadGLTF(models[modelIndex]['model'], v[i+1], v[i+2], v[i], normal, models[modelIndex]['type'], false);
-                        modelIndex++;
+                var normal = face.normal;
+                if (normal !== null) {
+                    if(modelIndex >= models.length){
+                        modelIndex = 0;
                     }
+                    loadGLTF(models[modelIndex]['model'], v[i+1], v[i+2], v[i], normal, models[modelIndex]['type'], false);
+                    modelIndex++;
+
+                    continue;
                 }
             }
         }
+
         if (Math.random() < .0023) {
             var ray = new THREE.Raycaster(new THREE.Vector3(v[i], v[i+1] + 5, v[i+2]), new THREE.Vector3(0,-1,0), 0, 10);
             var intersects = ray.intersectObjects(scene.children);
@@ -138,7 +137,6 @@ function UpdatePlane() {
                 }
             }
         }
-        
     }
     //  Ensures the mesh moves along with the Perlin noise offset/s.
     Perlin_Mesh.geometry.attributes.position.needsUpdate = true;
