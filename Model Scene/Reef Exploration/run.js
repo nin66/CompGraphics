@@ -2,7 +2,6 @@
 
 setScene();
 addLight();
-createFloor();
 addShapes();
 bubble();
 

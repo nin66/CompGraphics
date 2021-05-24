@@ -54,18 +54,16 @@ function buildGUI() {
 
     //  Should probably want to put these in different categories so it looks prettier.
     var params = {
-        TimeOfDay: directionalLight.rotation.z,
+        DaySpeed : fTimeOfDaySpeed,
         Flashlight : flashlight.visible,
         CameraSpeed : fVMovementSpeed
     }
 
-    gui.add(params, 'TimeOfDay', 0, 12, .1).onChange(function(rot) {
-        directionalLight.position.x = 50 * Math.cos(rot);
-        directionalLight.position.y = 50 * Math.sin(rot);
-        PerlinGeometry.computeVertexNormals();
+    gui.add(params, 'DaySpeed', .01, 1, .001).onChange(function(fDS) {
+        fTimeOfDaySpeed = fDS;
     });
 
-    gui.add(params, 'Flashlight').onChange(function(bOn){
+    gui.add(params, 'Flashlight').onChange(function(bOn) {
         flashlight.visible = bOn;
     });
 

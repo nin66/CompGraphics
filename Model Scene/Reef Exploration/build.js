@@ -56,7 +56,6 @@ function loadGLTF(url, x, y, z, normal, name, bMoveable) {
         gltf.scene.traverse(function (o) {
             if (o.isMesh) {
                 o.castShadow = true;
-                o.receiveShadow = true;
                 o.scale.set(2, 2, 2);
                 o.name = name;
             }
@@ -122,9 +121,8 @@ function loadGLTFCoral(url, x, y, z, normal, name) {
             if (o.isMesh) {
                 objects.push(o);
                 o.castShadow = true;
-                o.receiveShadow = true;
                 o.scale.set(2, 2, 2);
-                o.material = new THREE.MeshStandardMaterial();
+                o.material = new THREE.MeshPhongMaterial();
                 o.material.color = new THREE.Color(0xFFFFFF * Math.random());
 
                 o.name = name;
@@ -168,12 +166,7 @@ function loadGLTFCoral(url, x, y, z, normal, name) {
     });
 }
 
-var mesh = null;
-
-var directionalLight;
-var cameralight;
-var floor = null;
-
+var pointLight
 
 function bubble() {
     //bubbles made using overlaying a plane with a png texture
@@ -207,25 +200,19 @@ function bubble() {
 
 function addLight() {
     ambientLight = new THREE.AmbientLight(new THREE.Color(1, 1, 1), .5);
-    directionalLight = new THREE.DirectionalLight(new THREE.Color(1, 1, 1), .5);
-    directionalLight.position.set(0, 0, 0);
-    directionalLight.castShadow = true;
-}
 
-//Create floor
-function createFloor() {
-    var floorMaterial = new THREE.MeshLambertMaterial();
-    floorMaterial.color = new THREE.Color(1, 1, 1);
-    var floorGeometry = new THREE.PlaneGeometry(100, 50, 20, 10);
-
-    floor = new THREE.Mesh(floorGeometry, floorMaterial);
-    floor.rotation.x = -90 * (Math.PI / 180);
-    floor.position.y = -.5;
+    pointLight = new THREE.PointLight(0xFF8C00, 1, 0);
+    pointLight.position.set(0, 250, 0);
+    pointLight.castShadow = true;
+    pointLight.shadow.mapSize.width = 2048;
+    pointLight.shadow.mapSize.height = 2048;
+    pointLight.shadow.camera.near = 0.5;
+    pointLight.shadow.camera.far = 10000;
+    scene.add(pointLight);
 }
 
 //Add all shapes to the scene
 function addShapes() {
     scene.add(camera);
     scene.add(ambientLight);
-    scene.add(directionalLight);
 }
