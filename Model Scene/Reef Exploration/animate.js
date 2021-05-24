@@ -36,14 +36,10 @@ function animate() {
     requestAnimationFrame(animate);
 }
 
-//  Below is yoinked from the lab.
-
-//Define a raycaster from THREE to apply for intersected objects
 var raycaster = new THREE.Raycaster();
 raycaster.near = 0;
 raycaster.far = 5000;
 
-//add event listener to the model and move the model with mouse-down position
 function onDocumentMouseDown(event) {
     var mouse = new THREE.Vector2();
     mouse.x = (event.clientX / window.innerWidth) * 2 - 1
@@ -120,31 +116,33 @@ function onDocumentMouseDown(event) {
 
 var fPointLightTime = 0;
 var fTimeOfDaySpeed = .01;
+
 const v3Right = new THREE.Vector3(1, 0, 0);
-const solstice = new THREE.Color(0xFFFFFF);
-const sunsetrise = new THREE.Color(0xFF8C00);
+var vTo = new THREE.Vector3();              //  For some reason, THREE.js doesn't like setting a Vector3
+vTo.x = v3Right.x;                          //  like var v3 = v.position; so it is done like this.
+vTo.y = v3Right.y;                          //  It looks horrendous, but stick with it.
+vTo.z = v3Right.z;                          //  
+
+const au = 1536;    //  Distance between the sun and the terrain; astronomical unit.
+const solstice = new THREE.Color(0xFFFFFF);     //  Solstice colour: When the sun is directly above the terrain.
+const sunsetrise = new THREE.Color(0xFF8C00);   //  sunsetrise colour: When the sun's light is interrupted by the atmosphere.
 var colour = new THREE.Color();
 
 function computeDaylightColour(fDelta) {
     fPointLightTime += fDelta * fTimeOfDaySpeed;
-    pointLight.position.y = 1536 * Math.sin(fPointLightTime);
-    pointLight.position.x = 1536 * Math.cos(fPointLightTime);
+    pointLight.position.y = au * Math.sin(fPointLightTime);
+    pointLight.position.x = au * Math.cos(fPointLightTime);
 
-    var vFrom = new THREE.Vector3();
-    vFrom.x = pointLight.position.x;
-    vFrom.y = pointLight.position.y;
-    vFrom.z = pointLight.position.z;
-    
-    var vTo = new THREE.Vector3();
-    vTo.x = v3Right.x;
-    vTo.y = v3Right.y;
-    vTo.z = v3Right.z;
+    var vFrom = new THREE.Vector3();        //  
+    vFrom.x = pointLight.position.x;        //  
+    vFrom.y = pointLight.position.y;        //  
+    vFrom.z = pointLight.position.z;        //
 
     vFrom.normalize();
     vTo.normalize();
 
-    var dot = (vFrom.x * vTo.x) + (vFrom.y * vTo.y) + (vFrom.z * vTo.z);
-
+    var dot = (vFrom.x * vTo.x) + (vFrom.y * vTo.y) + (vFrom.z * vTo.z);    //  THREE.js' dot product function is wrong,
+                                                                            //  so this needs to be done.
     colour.lerpColors(solstice, sunsetrise, Math.abs(dot));
     pointLight.color = colour;
 }

@@ -1,6 +1,3 @@
-//  
-//  EXPERIMENTAL
-//  
 
 
 //Class property that returns the colour as a CSS hex color string 

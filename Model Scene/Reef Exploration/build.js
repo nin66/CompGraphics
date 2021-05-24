@@ -8,24 +8,24 @@ var bubbleParticles = []; //array of bubble objects
 
 var V3Zero = new THREE.Vector3(0, 0, 0);
 
-const kRocks = 'Rocks';
-const kCoral = 'Coral';
-const kFish = 'Fish';
-const kShells = 'Shells';
-const kSeaweed = 'SeaWeed';
-const kStarFish = 'Sea Star';
-const kCrab = 'Crab';
-const kDolphin = 'Dolphin';
-const kEel = 'Eel';
-const kHammerhead = 'Hammerhead';
-const kLobster = 'Lobster';
-const kOctopus = 'Octopus';
-const kSeal = 'Seal';
-const kShark = 'Shark';
-const kSquid = 'Squid';
-const kStingray = 'Stingray';
-const kTurtle = 'Turtle';
-const kWhale = 'Whale';
+const kRocks = 'Rocks';             //  Standardised and consistent spelling of objects/models.
+const kCoral = 'Coral';             //  This is so that there is no confusion or errors based on
+const kFish = 'Fish';               //  the spelling of models.
+const kShells = 'Shells';           //
+const kSeaweed = 'SeaWeed';         //  Spellings are preceded with 'k' to denote a constant and
+const kStarFish = 'Sea Star';       //  for autocomplete.
+const kCrab = 'Crab';               //
+const kDolphin = 'Dolphin';         //
+const kEel = 'Eel';                 //
+const kHammerhead = 'Hammerhead';   //
+const kLobster = 'Lobster';         //
+const kOctopus = 'Octopus';         //
+const kSeal = 'Seal';               //
+const kShark = 'Shark';             //
+const kSquid = 'Squid';             //
+const kStingray = 'Stingray';       //
+const kTurtle = 'Turtle';           //
+const kWhale = 'Whale';             //
 
 /**
  * Loads a GLTF model from url into the scene at x, y and z on a normal.
@@ -201,13 +201,16 @@ function bubble() {
 function addLight() {
     ambientLight = new THREE.AmbientLight(new THREE.Color(1, 1, 1), .5);
 
-    pointLight = new THREE.PointLight(0xFF8C00, 1, 0);
-    pointLight.position.set(0, 250, 0);
+    //  Removed the directional light because THREE.js' directional light doesn't cast shadows.
+    //  Replaced with a point light.
+    pointLight = new THREE.PointLight();
     pointLight.castShadow = true;
-    pointLight.shadow.mapSize.width = 2048;
-    pointLight.shadow.mapSize.height = 2048;
-    pointLight.shadow.camera.near = 0.5;
-    pointLight.shadow.camera.far = 10000;
+
+    //  Shadow settings.
+    pointLight.shadow.mapSize.width = 2048;     //  Shadow sample size.
+    pointLight.shadow.mapSize.height = 2048;    //
+    pointLight.shadow.camera.near = 0.5;            //  Shadow casting bounds.
+    pointLight.shadow.camera.far = 10000;           //
     scene.add(pointLight);
 }
 

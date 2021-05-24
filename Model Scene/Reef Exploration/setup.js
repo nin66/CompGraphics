@@ -36,9 +36,9 @@ function setScene() {
 
     renderer = new THREE.WebGLRenderer();
     renderer.setSize(window.innerWidth, window.innerHeight);
-    renderer.antialias = true;
-    renderer.shadowMap.enabled = true;
-    renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+    renderer.antialias = true;      //  This may decrease performance based on hardware.
+    renderer.shadowMap.enabled = true;                  //  Enable shadows.
+    renderer.shadowMap.type = THREE.PCFSoftShadowMap;   //
     document.body.appendChild(renderer.domElement);
 
     dragControls = new THREE.DragControls(objects, camera, renderer.domElement);
