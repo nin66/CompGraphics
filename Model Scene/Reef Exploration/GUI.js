@@ -52,9 +52,11 @@ class FogGUIHelper {
 function buildGUI() {
     gui = new dat.GUI();
 
+    //  Should probably want to put these in different categories so it looks prettier.
     var params = {
         TimeOfDay: directionalLight.rotation.z,
-        Flashlight : flashlight.visible
+        Flashlight : flashlight.visible,
+        CameraSpeed : fVMovementSpeed
     }
 
     gui.add(params, 'TimeOfDay', 0, 12, .1).onChange(function(rot) {
@@ -65,6 +67,10 @@ function buildGUI() {
 
     gui.add(params, 'Flashlight').onChange(function(bOn){
         flashlight.visible = bOn;
+    });
+
+    gui.add(params, 'CameraSpeed', 1, 10, .5).onChange(function(fV) {
+        fVMovementSpeed = fV;
     });
 
 }
