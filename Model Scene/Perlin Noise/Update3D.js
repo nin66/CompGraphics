@@ -2,6 +2,7 @@
 let modelIndex = 0;
 let coralIndex = 0;
 let moveIndex = 0;
+
 let corals = [
     {'model': 'models/gltf/Coral.glb', 'type': kCoral},
     {'model': 'models/gltf/Coral1.glb', 'type': kCoral},
@@ -12,6 +13,7 @@ let corals = [
     {'model': 'models/gltf/Coral6.glb', 'type': kCoral}
 
 ]
+
 let models = [
     {'model': 'models/gltf/Rocks1.glb', 'type': kRocks},
     {'model': 'models/gltf/Rocks2.glb', 'type': kRocks},
@@ -25,31 +27,37 @@ let models = [
     {'model': 'models/gltf/Rocks11.glb', 'type': kRocks},
     {'model': 'models/gltf/Rocks12.glb', 'type': kRocks},
     {'model': 'models/gltf/Shells.glb', 'type': kShells},
-    {'model': 'models/gltf/SeaWeed.glb', 'type': kSeaweed}
+    {'model': 'models/gltf/SeaWeed.glb', 'type': kSeaweed},
+    {'model': 'models/gltf/StarFish.glb', 'type': kStarFish}
 ]
+
 let movable = [ 
     {'model': 'models/gltf/Crab.glb', 'type': kCrab},
     {'model': 'models/gltf/Dolphin.glb', 'type': kDolphin},
     {'model': 'models/gltf/Eel.glb', 'type': kEel},
-    {'model': 'models/gltf/Fish.glb', 'type': kFish},
     {'model': 'models/gltf/Hammerhead.glb', 'type': kHammerhead},
     {'model': 'models/gltf/Lobster.glb', 'type': kLobster},
     {'model': 'models/gltf/Octopus.glb', 'type': kOctopus},
     {'model': 'models/gltf/Seal.glb', 'type': kSeal},
     {'model': 'models/gltf/Shark.glb', 'type': kShark},
     {'model': 'models/gltf/Squid.glb', 'type': kSquid},
-    {'model': 'models/gltf/StarFish.glb', 'type': kStarFish},
     {'model': 'models/gltf/StingRay.glb', 'type': kStingray},
     {'model': 'models/gltf/Turtle.glb', 'type': kTurtle},
     {'model': 'models/gltf/Whale.glb', 'type': kWhale}
 ]
+
 const upNormal = new THREE.Vector3(0, 1, 0);
+const kDeepWater = Utils.RGB(177, 176, 140);
+const kShallowWater = Utils.RGB(232, 227, 174);
+const kV3Down = new THREE.Vector3(0,-1,0);
+
+var v;
 
 //  Updates the plane's attributes.
 function UpdatePlane() {
     //  Converts the positions of the vertices that make up the plane into an array.
     //  Later used for modifying the Z-Axis points with Perlin noise.
-    var v = Perlin_Mesh.geometry.attributes.position.array;
+    v = Perlin_Mesh.geometry.attributes.position.array;
     const colours = [];
 
     for(var i = 0; i <= v.length; i += 3) {
@@ -67,22 +75,36 @@ function UpdatePlane() {
                                                         //  between -1 and 1.
                                                         //  Use Perlin Noise to generate heights and colours.
         if (Perlin < 0) {
-            var startColour = Utils.RGB(177, 176, 140);
-            var targetColour = Utils.RGB(232, 227, 174);
             var colour = new THREE.Color();
-            colour.lerpColors(targetColour, startColour, Math.abs(Perlin));     //  Interpolate colour based on Perlin Noise.
+            colour.lerpColors(kShallowWater, kDeepWater, Math.abs(Perlin));     //  Interpolate colour based on Perlin Noise.
             colours.push(colour.r, colour.g, colour.b);
         } else if (Perlin >= 0) {
-            var startColour = Utils.RGB(232, 227, 174);
-            var targetColour = Utils.RGB(232, 227, 174);
-            var colour = new THREE.Color();
-            colour.lerpColors(startColour, targetColour, Perlin);     //  Interpolate colour based on Perlin Noise.
-			colours.push(colour.r, colour.g, colour.b);
+			colours.push(kShallowWater.r, kShallowWater.g, kShallowWater.b);
         }
+    }
 
-        if (Math.random() < .0023) {
-            var ray = new THREE.Raycaster(new THREE.Vector3(v[i], v[i+1] + 5, v[i+2]), new THREE.Vector3(0,-1,0), 0, 10);
-            var intersects = ray.intersectObjects(scene.children);
+    //  Ensures the mesh moves along with the Perlin noise offset/s.
+    Perlin_Mesh.geometry.attributes.position.needsUpdate = true;
+    Perlin_Mesh.geometry.computeVertexNormals();
+
+    //  Set the colours of the triangle faces.
+    PerlinGeometry.setAttribute('color', new THREE.BufferAttribute(new Float32Array(colours), 3));
+
+    LoadModels();
+}
+
+//  Interpolates perlin heights using Sine Ease In-Out.
+function Function(f) {
+    return -(Math.cos(Math.PI * f) - 1 ) / 2;
+}
+
+function LoadModels() {
+    for (let i = 0; i < v.length; i+=3) {
+        
+
+        if (Math.random() < .023) {
+            var ray = new THREE.Raycaster(new THREE.Vector3(v[i], v[i+1] + 5, v[i+2]), kV3Down, 0, 5);
+            var intersects = ray.intersectObject(Perlin_Mesh);
             if (intersects.length > 0) {
                 var face = intersects[0].face;
                 if (face === null) { continue; }    //  Pass if there is no terrain underneath.
@@ -101,8 +123,8 @@ function UpdatePlane() {
         }
 
         if (Math.random() < .0023) {
-            var ray = new THREE.Raycaster(new THREE.Vector3(v[i], v[i+1] + 5, v[i+2]), new THREE.Vector3(0,-1,0), 0, 10);
-            var intersects = ray.intersectObjects(scene.children);
+            var ray = new THREE.Raycaster(new THREE.Vector3(v[i], v[i+1] + 5, v[i+2]), kV3Down, 0, 5);
+            var intersects = ray.intersectObject(Perlin_Mesh);
             if (intersects.length > 0) {
                 var face = intersects[0].face;
                 if (face === null) { continue; }    //  Pass if there is no terrain underneath.
@@ -120,34 +142,12 @@ function UpdatePlane() {
             }
         }
 
-        if (Math.random() < .0023) {
-            var ray = new THREE.Raycaster(new THREE.Vector3(v[i], v[i+1] + 5, v[i+2]), new THREE.Vector3(0,-1,0), 0, 10);
-            var intersects = ray.intersectObjects(scene.children);
-            if (intersects.length > 0) {
-                var face = intersects[0].face;
-                if (face === null) { continue; }    //  Pass if there is no terrain underneath.
-        
-                var normal = face.normal;
-                if (normal !== null) {
-                    if(moveIndex >= movable.length){
-                        moveIndex = 0;
-                    }
-                    loadGLTF(movable[moveIndex]['model'], v[i+1], v[i+2] + 100, v[i], normal, movable[moveIndex]['type'], true);
-                    moveIndex++;
-                }
+        if (Math.random() < .0046) {
+            if(moveIndex >= movable.length){
+                moveIndex = 0;
             }
+            loadGLTF(movable[moveIndex]['model'], v[i+1], Utils.random(v[i+2], v[i+2] + 100), v[i], V3Zero, movable[moveIndex]['type'], true);
+            moveIndex++;
         }
     }
-    //  Ensures the mesh moves along with the Perlin noise offset/s.
-    Perlin_Mesh.geometry.attributes.position.needsUpdate = true;
-    Perlin_Mesh.geometry.computeVertexNormals();
-
-    //  Set the colours of the triangle faces.
-    PerlinGeometry.setAttribute('color', new THREE.BufferAttribute(new Float32Array(colours), 3));
 }
-
-//  Interpolates perlin heights using Sine Ease In-Out.
-function Function(f) {
-    return f < 0.5 ? 4 * f * f * f : 1 - Math.pow(-2 * f + 2, 3) / 2;
-}
-

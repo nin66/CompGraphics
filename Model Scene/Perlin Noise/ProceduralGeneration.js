@@ -6,9 +6,6 @@ var width, height, scale;
 var resolution;
 var heightMultiplier;
 
-var offsetX, offsetY;
-var offsetDeltaX, offsetDeltaY;
-
 var PerlinGeometry, Perlin_Material, Perlin_Mesh;
 
 Start();
@@ -21,12 +18,9 @@ function Start(){
     //  Plane settings.
     width = 2048;
     height = 2048;
-    resolution = 500;
+    resolution = 256;
     
     //  Perlin noise settings. [PLANE]
     scale = 250;
     heightMultiplier = 105;
-
-    offsetDeltaX = .025;
-    offsetDeltaY = .025;
 }

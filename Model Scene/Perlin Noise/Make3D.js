@@ -15,6 +15,7 @@ function MakePlane(){
     Perlin_Mesh.rotation.x = rot;
     Perlin_Mesh.rotation.z = rot;
     
+    Perlin_Mesh.castShadow = true;
     Perlin_Mesh.receiveShadow = true;
     
     PerlinGeometry.computeVertexNormals();

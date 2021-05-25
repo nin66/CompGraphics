@@ -1,6 +1,6 @@
 
 
-//  Utils module for Group 87, Assignment 4.
+//  Utils module for Group 18, Assignment 4.
 
 function A4(){
 
@@ -34,5 +34,9 @@ function A4(){
     this.RGBToV = function(r, g, b) {
         const kRatio255 = 0.0039215686274509803921568627451;
         return new THREE.Vector3(r * kRatio255, g * kRatio255, b * kRatio255);
+    }
+
+    this.Debug = function(e) {
+        console.log(e);
     }
 }
