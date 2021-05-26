@@ -4,6 +4,8 @@ var GLTFLoader = new THREE.GLTFLoader(loadingManager);
 let mixer = [];
 /** An array of all moveable models. */
 let moveableModels = [];
+let fishies = [];
+let coralModels = [];
 var bubbleParticles = []; //array of bubble objects
 
 var V3Zero = new THREE.Vector3(0, 0, 0);
@@ -61,7 +63,9 @@ function loadGLTF(url, x, y, z, normal, name, bMoveable) {
             }
         });
 
-        if (bMoveable) {
+        if (name === kFish) {
+            fishies.push(gltf.scene);
+        } else if (bMoveable) {
             moveableModels.push(gltf.scene);
         }
 
@@ -150,18 +154,20 @@ function loadGLTFCoral(url, x, y, z, normal, name) {
 
         gltf.scene.name = name;
 
+        coralModels.push(gltf.scene);
+
         scene.add(gltf.scene);
 
         if (randomScale > 4) {
             var random = Math.random();
             if (random < .25)
-                loadGLTF('models/gltf/BrownFish.glb', x, y + 10, z, V3Zero, kFish, true);
+                loadGLTF('models/gltf/BrownFish.glb', x, y + 10, z, V3Zero, kFish, false);
             else if (random < .5)
-                loadGLTF('models/gltf/Dory.glb', x, y + 10, z, V3Zero, kFish, true);
+                loadGLTF('models/gltf/Dory.glb', x, y + 10, z, V3Zero, kFish, false);
             else if (random < .75)
-                loadGLTF('models/gltf/Marlin.glb', x, y + 10, z, V3Zero, kFish, true);
+                loadGLTF('models/gltf/Marlin.glb', x, y + 10, z, V3Zero, kFish, false);
             else
-                loadGLTF('models/gltf/Tuna.glb', x, y + 10, z, V3Zero, kFish, true);
+                loadGLTF('models/gltf/Tuna.glb', x, y + 10, z, V3Zero, kFish, false);
         }
     });
 }

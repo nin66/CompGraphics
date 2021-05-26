@@ -39,4 +39,8 @@ function A4(){
     this.Debug = function(e) {
         console.log(e);
     }
+
+    this.Interpolate = function() {
+        return .125;
+    }
 }

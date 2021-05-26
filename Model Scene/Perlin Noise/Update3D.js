@@ -1,4 +1,6 @@
 
+
+var bIntialised = false;
 let modelIndex = 0;
 let coralIndex = 0;
 let moveIndex = 0;
@@ -11,7 +13,6 @@ let corals = [
     {'model': 'models/gltf/Coral4.glb', 'type': kCoral},
     {'model': 'models/gltf/Coral5.glb', 'type': kCoral},
     {'model': 'models/gltf/Coral6.glb', 'type': kCoral}
-
 ]
 
 let models = [
@@ -43,7 +44,35 @@ let movable = [
     {'model': 'models/gltf/Squid.glb', 'type': kSquid},
     {'model': 'models/gltf/StingRay.glb', 'type': kStingray},
     {'model': 'models/gltf/Turtle.glb', 'type': kTurtle},
-    {'model': 'models/gltf/Whale.glb', 'type': kWhale}
+    {'model': 'models/gltf/Whale.glb', 'type': kWhale},
+    {'model': 'models/gltf/BrownFish.glb', 'type': kFish},
+    {'model': 'models/gltf/Dory.glb', 'type': kFish},
+    {'model': 'models/gltf/Marlin.glb', 'type': kFish},
+    {'model': 'models/gltf/Tuna.glb', 'type': kFish},
+    {'model': 'models/gltf/BrownFish.glb', 'type': kFish},
+    {'model': 'models/gltf/Dory.glb', 'type': kFish},
+    {'model': 'models/gltf/Marlin.glb', 'type': kFish},
+    {'model': 'models/gltf/Tuna.glb', 'type': kFish},
+    {'model': 'models/gltf/BrownFish.glb', 'type': kFish},
+    {'model': 'models/gltf/Dory.glb', 'type': kFish},
+    {'model': 'models/gltf/Marlin.glb', 'type': kFish},
+    {'model': 'models/gltf/Tuna.glb', 'type': kFish},
+    {'model': 'models/gltf/BrownFish.glb', 'type': kFish},
+    {'model': 'models/gltf/Dory.glb', 'type': kFish},
+    {'model': 'models/gltf/Marlin.glb', 'type': kFish},
+    {'model': 'models/gltf/Tuna.glb', 'type': kFish},
+    {'model': 'models/gltf/BrownFish.glb', 'type': kFish},
+    {'model': 'models/gltf/Dory.glb', 'type': kFish},
+    {'model': 'models/gltf/Marlin.glb', 'type': kFish},
+    {'model': 'models/gltf/Tuna.glb', 'type': kFish},
+    {'model': 'models/gltf/BrownFish.glb', 'type': kFish},
+    {'model': 'models/gltf/Dory.glb', 'type': kFish},
+    {'model': 'models/gltf/Marlin.glb', 'type': kFish},
+    {'model': 'models/gltf/Tuna.glb', 'type': kFish},
+    {'model': 'models/gltf/BrownFish.glb', 'type': kFish},
+    {'model': 'models/gltf/Dory.glb', 'type': kFish},
+    {'model': 'models/gltf/Marlin.glb', 'type': kFish},
+    {'model': 'models/gltf/Tuna.glb', 'type': kFish}
 ]
 
 const upNormal = new THREE.Vector3(0, 1, 0);
@@ -91,6 +120,8 @@ function UpdatePlane() {
     PerlinGeometry.setAttribute('color', new THREE.BufferAttribute(new Float32Array(colours), 3));
 
     LoadModels();
+
+    bInitialised = true;
 }
 
 //  Interpolates perlin heights using Sine Ease In-Out.
@@ -122,31 +153,31 @@ function LoadModels() {
             }
         }
 
-        if (Math.random() < .0023) {
-            var ray = new THREE.Raycaster(new THREE.Vector3(v[i], v[i+1] + 5, v[i+2]), kV3Down, 0, 5);
-            var intersects = ray.intersectObject(Perlin_Mesh);
-            if (intersects.length > 0) {
-                var face = intersects[0].face;
-                if (face === null) { continue; }    //  Pass if there is no terrain underneath.
+        // if (Math.random() < .0023) {
+        //     var ray = new THREE.Raycaster(new THREE.Vector3(v[i], v[i+1] + 5, v[i+2]), kV3Down, 0, 5);
+        //     var intersects = ray.intersectObject(Perlin_Mesh);
+        //     if (intersects.length > 0) {
+        //         var face = intersects[0].face;
+        //         if (face === null) { continue; }    //  Pass if there is no terrain underneath.
 
-                var normal = face.normal;
-                if (normal !== null) {
-                    if(modelIndex >= models.length){
-                        modelIndex = 0;
-                    }
-                    loadGLTF(models[modelIndex]['model'], v[i+1], v[i+2], v[i], normal, models[modelIndex]['type'], false);
-                    modelIndex++;
+        //         var normal = face.normal;
+        //         if (normal !== null) {
+        //             if(modelIndex >= models.length){
+        //                 modelIndex = 0;
+        //             }
+        //             loadGLTF(models[modelIndex]['model'], v[i+1], v[i+2], v[i], normal, models[modelIndex]['type'], false);
+        //             modelIndex++;
 
-                    continue;
-                }
-            }
-        }
+        //             continue;
+        //         }
+        //     }
+        // }
 
         if (Math.random() < .0046) {
             if(moveIndex >= movable.length){
                 moveIndex = 0;
             }
-            loadGLTF(movable[moveIndex]['model'], v[i+1], Utils.random(v[i+2], v[i+2] + 100), v[i], V3Zero, movable[moveIndex]['type'], true);
+            loadGLTF(movable[moveIndex]['model'], v[i+1], Utils.random(v[i+2] + 1, v[i+2] + 100), v[i], V3Zero, movable[moveIndex]['type'], true);
             moveIndex++;
         }
     }
