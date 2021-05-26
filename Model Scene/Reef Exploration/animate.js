@@ -5,6 +5,7 @@ var seekerTarget = [];
 
 var bInitialised = false;
 var bCalculatedPath = false;
+var bFishiesDone = false;
 
 function animate() {
     
@@ -27,25 +28,28 @@ function animate() {
     });
 
     if (bInitialised && !bCalculatedPath) {
-        fishies.forEach(function(model) {
-            CalculatePathfinding(model);
-        });
-    }
+		for (let i = 0; i < fishies.length; ++i) {
+            CalculatePathfinding(fishies[i]);
+		}
+
+		bFishiesDone = true;
+	}
     
-    if (bInitialised && seeker.length > 0) {
+	if (bInitialised && seeker.length > 0 && bFishiesDone) {
+		
         bCalculatedPath = true;
         
-        for (let currentSeeker = 0; currentSeeker < seeker.length; ++currentSeeker) {
-            if (DistanceBetween(seeker[currentSeeker].position, seekerTarget[currentSeeker].position) > 5) {
+		for (let i = 0; i < seeker.length; ++i) {
+            if (DistanceBetween(seeker[i].position, seekerTarget[i].position) > 5) {
                 var vFrom = new THREE.Vector3();
-                vFrom.x = seeker[currentSeeker].position.x;
-                vFrom.y = seeker[currentSeeker].position.y;
-                vFrom.z = seeker[currentSeeker].position.z;
+                vFrom.x = seeker[i].position.x;
+                vFrom.y = seeker[i].position.y;
+                vFrom.z = seeker[i].position.z;
 
                 var vTo = new THREE.Vector3();
-                vTo.x = seekerTarget[currentSeeker].position.x;
-                vTo.y = seekerTarget[currentSeeker].position.y + 5;
-                vTo.z = seekerTarget[currentSeeker].position.z;
+                vTo.x = seekerTarget[i].position.x;
+                vTo.y = seekerTarget[i].position.y + 5;
+                vTo.z = seekerTarget[i].position.z;
 
                 var vTargetPosition = new THREE.Vector3();
                 vTargetPosition.x = vTo.x - vFrom.x;
@@ -53,9 +57,9 @@ function animate() {
                 vTargetPosition.z = vTo.z - vFrom.z;
                 vTargetPosition.normalize();
 
-                seeker[currentSeeker].position.x += vTargetPosition.x;
-                seeker[currentSeeker].position.y += vTargetPosition.y;
-                seeker[currentSeeker].position.z += vTargetPosition.z;
+                seeker[i].position.x += vTargetPosition.x;
+                seeker[i].position.y += vTargetPosition.y;
+                seeker[i].position.z += vTargetPosition.z;
             }
         }
     }
@@ -179,12 +183,19 @@ function ComputeDaylightColour(fDelta) {
 
 const kMinimumThreshold = 0;
 const kMaximumThreshold = 200;
+let occupiedCorals = [];
 
 function CalculatePathfinding(model) {
+
     var vFrom = new THREE.Vector3();
     var vTo = new THREE.Vector3();
 
     for (let i = 0; i < coralModels.length; ++i) {
+
+		if (occupiedCorals.includes(i)) {
+			continue;
+		}
+
         vFrom.x = coralModels[i].position.x;
         vFrom.y = coralModels[i].position.y;
         vFrom.z = coralModels[i].position.z;
@@ -208,7 +219,9 @@ function CalculatePathfinding(model) {
         seeker.push(model);
         seekerTarget.push(coralModels[i]);
         
-        model.lookAt(coralModels[i].position);
+		model.lookAt(coralModels[i].position);
+
+		occupiedCorals.push(i);
 
         break;
     }

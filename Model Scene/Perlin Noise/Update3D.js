@@ -6,7 +6,7 @@ let coralIndex = 0;
 let moveIndex = 0;
 
 let corals = [
-    {'model': 'models/gltf/Coral.glb', 'type': kCoral},
+    {'model': 'models/gltf/Coral.glb',	'type': kCoral},
     {'model': 'models/gltf/Coral1.glb', 'type': kCoral},
     {'model': 'models/gltf/Coral2.glb', 'type': kCoral},
     {'model': 'models/gltf/Coral3.glb', 'type': kCoral},
@@ -16,63 +16,39 @@ let corals = [
 ]
 
 let models = [
-    {'model': 'models/gltf/Rocks1.glb', 'type': kRocks},
-    {'model': 'models/gltf/Rocks2.glb', 'type': kRocks},
-    {'model': 'models/gltf/Rocks3.glb', 'type': kRocks},
-    {'model': 'models/gltf/Rocks4.glb', 'type': kRocks},
-    {'model': 'models/gltf/Rocks5.glb', 'type': kRocks},
-    {'model': 'models/gltf/Rocks6.glb', 'type': kRocks},
-    {'model': 'models/gltf/Rocks7.glb', 'type': kRocks},
-    {'model': 'models/gltf/Rocks8.glb', 'type': kRocks},
-    {'model': 'models/gltf/Rocks10.glb', 'type': kRocks},
-    {'model': 'models/gltf/Rocks11.glb', 'type': kRocks},
-    {'model': 'models/gltf/Rocks12.glb', 'type': kRocks},
-    {'model': 'models/gltf/Shells.glb', 'type': kShells},
-    {'model': 'models/gltf/SeaWeed.glb', 'type': kSeaweed},
-    {'model': 'models/gltf/StarFish.glb', 'type': kStarFish}
+    {'model': 'models/gltf/Rocks1.glb',		'type': kRocks},
+    {'model': 'models/gltf/Rocks2.glb',		'type': kRocks},
+    {'model': 'models/gltf/Rocks3.glb',		'type': kRocks},
+    {'model': 'models/gltf/Rocks4.glb',		'type': kRocks},
+    {'model': 'models/gltf/Rocks5.glb',		'type': kRocks},
+    {'model': 'models/gltf/Rocks6.glb',		'type': kRocks},
+    {'model': 'models/gltf/Rocks7.glb',		'type': kRocks},
+    {'model': 'models/gltf/Rocks8.glb',		'type': kRocks},
+    {'model': 'models/gltf/Rocks10.glb',	'type': kRocks},
+    {'model': 'models/gltf/Rocks11.glb',	'type': kRocks},
+    {'model': 'models/gltf/Rocks12.glb',	'type': kRocks},
+    {'model': 'models/gltf/Shells.glb',		'type': kShells},
+    {'model': 'models/gltf/SeaWeed.glb',	'type': kSeaweed},
+    {'model': 'models/gltf/StarFish.glb',	'type': kStarFish}
 ]
 
 let movable = [ 
-    {'model': 'models/gltf/Crab.glb', 'type': kCrab},
-    {'model': 'models/gltf/Dolphin.glb', 'type': kDolphin},
-    {'model': 'models/gltf/Eel.glb', 'type': kEel},
+    {'model': 'models/gltf/Crab.glb',		'type': kCrab},
+    {'model': 'models/gltf/Dolphin.glb',	'type': kDolphin},
+    {'model': 'models/gltf/Eel.glb',		'type': kEel},
     {'model': 'models/gltf/Hammerhead.glb', 'type': kHammerhead},
-    {'model': 'models/gltf/Lobster.glb', 'type': kLobster},
-    {'model': 'models/gltf/Octopus.glb', 'type': kOctopus},
-    {'model': 'models/gltf/Seal.glb', 'type': kSeal},
-    {'model': 'models/gltf/Shark.glb', 'type': kShark},
-    {'model': 'models/gltf/Squid.glb', 'type': kSquid},
-    {'model': 'models/gltf/StingRay.glb', 'type': kStingray},
-    {'model': 'models/gltf/Turtle.glb', 'type': kTurtle},
-    {'model': 'models/gltf/Whale.glb', 'type': kWhale},
-    {'model': 'models/gltf/BrownFish.glb', 'type': kFish},
-    {'model': 'models/gltf/Dory.glb', 'type': kFish},
-    {'model': 'models/gltf/Marlin.glb', 'type': kFish},
-    {'model': 'models/gltf/Tuna.glb', 'type': kFish},
-    {'model': 'models/gltf/BrownFish.glb', 'type': kFish},
-    {'model': 'models/gltf/Dory.glb', 'type': kFish},
-    {'model': 'models/gltf/Marlin.glb', 'type': kFish},
-    {'model': 'models/gltf/Tuna.glb', 'type': kFish},
-    {'model': 'models/gltf/BrownFish.glb', 'type': kFish},
-    {'model': 'models/gltf/Dory.glb', 'type': kFish},
-    {'model': 'models/gltf/Marlin.glb', 'type': kFish},
-    {'model': 'models/gltf/Tuna.glb', 'type': kFish},
-    {'model': 'models/gltf/BrownFish.glb', 'type': kFish},
-    {'model': 'models/gltf/Dory.glb', 'type': kFish},
-    {'model': 'models/gltf/Marlin.glb', 'type': kFish},
-    {'model': 'models/gltf/Tuna.glb', 'type': kFish},
-    {'model': 'models/gltf/BrownFish.glb', 'type': kFish},
-    {'model': 'models/gltf/Dory.glb', 'type': kFish},
-    {'model': 'models/gltf/Marlin.glb', 'type': kFish},
-    {'model': 'models/gltf/Tuna.glb', 'type': kFish},
-    {'model': 'models/gltf/BrownFish.glb', 'type': kFish},
-    {'model': 'models/gltf/Dory.glb', 'type': kFish},
-    {'model': 'models/gltf/Marlin.glb', 'type': kFish},
-    {'model': 'models/gltf/Tuna.glb', 'type': kFish},
-    {'model': 'models/gltf/BrownFish.glb', 'type': kFish},
-    {'model': 'models/gltf/Dory.glb', 'type': kFish},
-    {'model': 'models/gltf/Marlin.glb', 'type': kFish},
-    {'model': 'models/gltf/Tuna.glb', 'type': kFish}
+    {'model': 'models/gltf/Lobster.glb',	'type': kLobster},
+    {'model': 'models/gltf/Octopus.glb',	'type': kOctopus},
+    {'model': 'models/gltf/Seal.glb',		'type': kSeal},
+    {'model': 'models/gltf/Shark.glb',		'type': kShark},
+    {'model': 'models/gltf/Squid.glb',		'type': kSquid},
+    {'model': 'models/gltf/StingRay.glb',	'type': kStingray},
+    {'model': 'models/gltf/Turtle.glb',		'type': kTurtle},
+    {'model': 'models/gltf/Whale.glb',		'type': kWhale},
+    {'model': 'models/gltf/BrownFish.glb',	'type': kFish},
+    {'model': 'models/gltf/Dory.glb',		'type': kFish},
+    {'model': 'models/gltf/Tuna.glb',		'type': kFish},
+    {'model': 'models/gltf/Marlin.glb',		'type': kFish},
 ]
 
 const upNormal = new THREE.Vector3(0, 1, 0);
@@ -173,11 +149,11 @@ function LoadModels() {
         //     }
         // }
 
-        if (Math.random() < .0046) {
+        if (Math.random() < .0069) {
             if(moveIndex >= movable.length){
                 moveIndex = 0;
             }
-            loadGLTF(movable[moveIndex]['model'], v[i+1], Utils.random(v[i+2] + 1, v[i+2] + 100), v[i], V3Zero, movable[moveIndex]['type'], true);
+            loadGLTF(movable[moveIndex]['model'], v[i+1], Utils.random(v[i+2] + 50, v[i+2] + 150), v[i], V3Zero, movable[moveIndex]['type'], true);
             moveIndex++;
         }
     }

@@ -63,8 +63,8 @@ function loadGLTF(url, x, y, z, normal, name, bMoveable) {
             }
         });
 
-        if (name === kFish) {
-            fishies.push(gltf.scene);
+		if (name === kFish) {
+			fishies.push(gltf.scene);
         } else if (bMoveable) {
             moveableModels.push(gltf.scene);
         }
