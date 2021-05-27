@@ -140,6 +140,7 @@ function ComputeDaylightColour(fDelta) {
 }
 
 const kMoveSpeed = 7.5;
+let facing = [];
 
 function PerformMovement() {
     if (bInitialised && seeker.length > 0) {
@@ -168,7 +169,15 @@ function PerformMovement() {
                 seeker[i].position.y += vTargetPosition.y * kMoveSpeed * delta;
                 seeker[i].position.z += vTargetPosition.z * kMoveSpeed * delta;
 
-                seeker[i].lookAt(seekerTarget[i].position);
+                if (!facing.includes(i)) {
+                    facing.push(i);
+                    seeker[i].lookAt(seekerTarget[i].position);
+                }
+
+            } else {
+                //  On Target Reached.
+                seeker.splice(i, 1);
+                seekerTarget.splice(i, 1);
             }
         }
     }
