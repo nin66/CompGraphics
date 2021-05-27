@@ -133,8 +133,8 @@ function ComputeDaylightColour(fDelta) {
     vFrom.normalize();
     vTo.normalize();
 
-    var dot = (vFrom.x * vTo.x) + (vFrom.y * vTo.y) + (vFrom.z * vTo.z);    //  THREE.js' dot product function is wrong,
-                                                                            //  so this needs to be done.
+    var dot = A4.Dot(vFrom, vTo);
+    
     colour.lerpColors(solstice, sunsetrise, Math.abs(dot));
     pointLight.color = colour;
 }
@@ -147,7 +147,7 @@ function PerformMovement() {
         bCalculatedPath = true;
         
 		for (let i = 0; i < seeker.length; ++i) {
-            if (DistanceBetween(seeker[i].position, seekerTarget[i].position) > 5) {
+            if (A4.Distance(seeker[i].position, seekerTarget[i].position) > 5) {
                 var vFrom = new THREE.Vector3();
                 vFrom.x = seeker[i].position.x;
                 vFrom.y = seeker[i].position.y;

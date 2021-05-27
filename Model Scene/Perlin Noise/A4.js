@@ -4,6 +4,8 @@
 
 class A4 {
 
+    static kEpsilon = 0.00001;
+
     static Deg2Rad() {
         return Math.PI * 2.0 / 360.0;
     }
@@ -76,7 +78,7 @@ class A4 {
         if (mag > kEpsilon)
             return value / mag;
         else
-            return zero;
+            return new THREE.Vector3(0, 0, 0);
     }
 
     static Dot (lhs, rhs) {
