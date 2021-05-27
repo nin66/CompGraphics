@@ -8,10 +8,9 @@ function animate() {
 
     bubbleParticles.forEach(b => { //bubble animation (spins around z axis)
         b.position.addScaledVector(direction, speed * delta);
-        b.position.y+=.07;
         b.rotation.z-=.02;
-        if (b.position.y >= 800) {
-            b.position.y = 100;
+        if (b.position.y >= 100) { //respawn height
+            b.position.y = 10; 
         } else {
         }
     });

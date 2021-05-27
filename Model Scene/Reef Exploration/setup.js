@@ -12,7 +12,7 @@ var dragControls;
 var time = 0;
 var delta = 0;
 var direction = new THREE.Vector3(0, 1, 0);
-var speed = 0.5; // units a second 
+var speed = 1.3; // units a second
 
 const loadingManager = new THREE.LoadingManager(() => {
 
@@ -48,7 +48,7 @@ function setScene() {
 
     scene.fog = new THREE.FogExp2(0x144b6d, 0.003);
     clock = new THREE.Clock();
-    flashlight = new THREE.SpotLight(0xffffff, 2, 300, 75, 0.5);
+    flashlight = new THREE.SpotLight(0xe8e2b0, .8, 300, 75, 0.5);
     camera.add(flashlight);
     flashlight.position.set(0, 0, 1);
     flashlight.target = camera;
@@ -59,6 +59,8 @@ function setScene() {
     // create an AudioListener (wait for scene to load before emitting sound)
     const listener = new THREE.AudioListener(loadingManager);
     camera.add(listener);
+
+
     const sound = new THREE.Audio(listener);
     const audioLoader = new THREE.AudioLoader(loadingManager); //load the sound
     audioLoader.load('ambient.mp3', function (buffer) {
@@ -67,6 +69,7 @@ function setScene() {
         sound.setVolume(0.5);
         sound.play();
     });
+
 }
 
 //Resize the scene and update the camera aspect to the screen ration

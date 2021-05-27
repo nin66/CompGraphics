@@ -192,12 +192,12 @@ function bubble() {
             blending: THREE.AdditiveBlending //allows for better blending effect of transparent pngs
         });
 
-        for (let p = 0; p < 100; p++) {
+        for (let p = 0; p < 450; p++) {
             let bubble = new THREE.Mesh(bubbleGeo, bubbleMaterial);
             bubble.position.set(
-                Math.random() * 800 - 200,
+                Math.random() * 2800 - 1200,
                 20,
-                Math.random() * 500 - 250
+                Math.random() * 2500 - 1250
             );
             bubble.rotation.x = 0;
             bubble.rotation.y = 0;
