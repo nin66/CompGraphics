@@ -4,9 +4,15 @@ var GLTFLoader = new THREE.GLTFLoader(loadingManager);
 let mixer = [];
 /** An array of all moveable models. */
 let moveableModels = [];
-let fishies = [];
 let coralModels = [];
 var bubbleParticles = []; //array of bubble objects
+
+let fishies = [];
+var seeker = [];
+var seekerTarget = [];
+
+var bInitialised = false;
+var bCalculatedPath = false;
 
 var V3Zero = new THREE.Vector3(0, 0, 0);
 
@@ -63,7 +69,8 @@ function loadGLTF(url, x, y, z, normal, name, bMoveable) {
             }
         });
 
-		if (name === kFish) {
+		if (name == kFish) {
+            CalculatePathfinding(gltf.scene);
 			fishies.push(gltf.scene);
         } else if (bMoveable) {
             moveableModels.push(gltf.scene);
@@ -82,7 +89,7 @@ function loadGLTF(url, x, y, z, normal, name, bMoveable) {
         // gltf.scene.lookAt(gltf.scene.position.x + up.x, gltf.scene.position.y + up.y, gltf.scene.position.z + up.z);
         gltf.castShadow = true;
 
-        var randomScale = Utils.random(1, 5);
+        var randomScale = A4.random(1, 5);
         gltf.scene.scale.set(randomScale, randomScale, randomScale);
 
         // //  Axes helper for rotations and normals.
@@ -146,7 +153,7 @@ function loadGLTFCoral(url, x, y, z, normal, name) {
 
         gltf.castShadow = true;
 
-        var randomScale = Utils.random(1, 5);
+        var randomScale = A4.random(1, 5);
         gltf.scene.scale.set(randomScale, randomScale, randomScale);
 
         // const ax = new THREE.AxesHelper(20);
@@ -224,4 +231,50 @@ function addLight() {
 function addShapes() {
     scene.add(camera);
     scene.add(ambientLight);
+}
+
+const kMinimumThreshold = 0;
+const kMaximumThreshold = 200;
+let occupiedCorals = [];
+
+function CalculatePathfinding(model) {
+
+    for (let i = 0; i < coralModels.length; ++i) {
+
+		if (occupiedCorals.includes(i)) {
+			continue;
+		}
+
+        /** 
+         * The below commented-out code is an attempt at forward-future collision *AVOIDANCE*
+         * and *NOT* detection.
+         * 
+         * Feel free to modify, to fix it. Right now, fishies can go through the terrain.
+         * 
+         * Uncommenting this consumes more processing power (it takes >minute to load on my computer).
+         */
+        // var vDir = new THREE.Vector3();                              //  Get a normalised direction relative to
+        // vDir.x = coralModels[i].position.x - model.position.x;       //  model and the target coral.
+        // vDir.y = coralModels[i].position.y - model.position.y;       //  v1 : direction relative to, v2 : target
+        // vDir.z = coralModels[i].position.z - model.position.z;       //  d = v2 - v1
+        // vDir.normalize();                                            //  d^ = d / |d|
+
+        // var ray = new THREE.Raycaster(model.position, vDir, kMinimumThreshold, kMaximumThreshold);
+        // var intersects = ray.intersectObject(Perlin_Mesh);   //  The raycast will only hit the terrain.
+
+        // if (intersects.length > 0) {     //  If raycast hit = true,
+        //     continue;                    //  We know that the fishy will go through the terrain.
+        // }
+        
+        seeker.push(model);
+        seekerTarget.push(coralModels[i]);
+
+		occupiedCorals.push(i);
+
+        break;
+    }
+}
+
+function DistanceBetween(v1, v2) {
+    return Math.sqrt(((v2.x - v1.x) * (v2.x - v1.x)) + ((v2.y - v1.y) * (v2.y - v1.y)) + ((v2.z - v1.z) * (v2.z - v1.z)));
 }

@@ -1,7 +1,5 @@
 
 
-var Utils;
-
 var width, height, scale;
 var resolution;
 var heightMultiplier;
@@ -12,8 +10,6 @@ Start();
 
 //  Called before the first frame.
 function Start(){
-
-    Utils = new A4();
 
     //  Plane settings.
     width = 2048;

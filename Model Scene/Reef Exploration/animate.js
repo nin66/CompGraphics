@@ -1,12 +1,5 @@
 
 
-var seeker = [];
-var seekerTarget = [];
-
-var bInitialised = false;
-var bCalculatedPath = false;
-var bFishiesDone = false;
-
 function animate() {
     
     /** Delta time */
@@ -26,43 +19,8 @@ function animate() {
     mixer.forEach(function (call){
         call.update(delta);
     });
-
-    if (bInitialised && !bCalculatedPath) {
-		for (let i = 0; i < fishies.length; ++i) {
-            CalculatePathfinding(fishies[i]);
-		}
-
-		bFishiesDone = true;
-	}
     
-	if (bInitialised && seeker.length > 0 && bFishiesDone) {
-		
-        bCalculatedPath = true;
-        
-		for (let i = 0; i < seeker.length; ++i) {
-            if (DistanceBetween(seeker[i].position, seekerTarget[i].position) > 5) {
-                var vFrom = new THREE.Vector3();
-                vFrom.x = seeker[i].position.x;
-                vFrom.y = seeker[i].position.y;
-                vFrom.z = seeker[i].position.z;
-
-                var vTo = new THREE.Vector3();
-                vTo.x = seekerTarget[i].position.x;
-                vTo.y = seekerTarget[i].position.y + 5;
-                vTo.z = seekerTarget[i].position.z;
-
-                var vTargetPosition = new THREE.Vector3();
-                vTargetPosition.x = vTo.x - vFrom.x;
-                vTargetPosition.y = vTo.y - vFrom.y;
-                vTargetPosition.z = vTo.z - vFrom.z;
-                vTargetPosition.normalize();
-
-                seeker[i].position.x += vTargetPosition.x;
-                seeker[i].position.y += vTargetPosition.y;
-                seeker[i].position.z += vTargetPosition.z;
-            }
-        }
-    }
+	PerformMovement();
 
     ComputeDaylightColour(delta);
 
@@ -181,52 +139,37 @@ function ComputeDaylightColour(fDelta) {
     pointLight.color = colour;
 }
 
-const kMinimumThreshold = 0;
-const kMaximumThreshold = 200;
-let occupiedCorals = [];
+const kMoveSpeed = 7.5;
 
-function CalculatePathfinding(model) {
+function PerformMovement() {
+    if (bInitialised && seeker.length > 0) {
+		
+        bCalculatedPath = true;
+        
+		for (let i = 0; i < seeker.length; ++i) {
+            if (DistanceBetween(seeker[i].position, seekerTarget[i].position) > 5) {
+                var vFrom = new THREE.Vector3();
+                vFrom.x = seeker[i].position.x;
+                vFrom.y = seeker[i].position.y;
+                vFrom.z = seeker[i].position.z;
 
-    var vFrom = new THREE.Vector3();
-    var vTo = new THREE.Vector3();
+                var vTo = new THREE.Vector3();
+                vTo.x = seekerTarget[i].position.x;
+                vTo.y = seekerTarget[i].position.y + 5;
+                vTo.z = seekerTarget[i].position.z;
 
-    for (let i = 0; i < coralModels.length; ++i) {
+                var vTargetPosition = new THREE.Vector3();
+                vTargetPosition.x = vTo.x - vFrom.x;
+                vTargetPosition.y = vTo.y - vFrom.y;
+                vTargetPosition.z = vTo.z - vFrom.z;
+                vTargetPosition.normalize();
 
-		if (occupiedCorals.includes(i)) {
-			continue;
-		}
+                seeker[i].position.x += vTargetPosition.x * kMoveSpeed * delta;
+                seeker[i].position.y += vTargetPosition.y * kMoveSpeed * delta;
+                seeker[i].position.z += vTargetPosition.z * kMoveSpeed * delta;
 
-        vFrom.x = coralModels[i].position.x;
-        vFrom.y = coralModels[i].position.y;
-        vFrom.z = coralModels[i].position.z;
-
-        vTo.x = model.position.x;
-        vTo.y = model.position.y + 10;
-        vTo.z = model.position.z;
-
-        vFrom.normalize();
-        vTo.normalize();
-
-        var vDir = vTo.sub(vFrom).normalize();
-
-        var ray = new THREE.Raycaster(model.position, vDir, kMinimumThreshold, kMaximumThreshold);
-        var intersects = ray.intersectObject(Perlin_Mesh);
-
-        if (intersects.length > 0) {
-            continue;
+                seeker[i].lookAt(seekerTarget[i].position);
+            }
         }
-        
-        seeker.push(model);
-        seekerTarget.push(coralModels[i]);
-        
-		model.lookAt(coralModels[i].position);
-
-		occupiedCorals.push(i);
-
-        break;
     }
-}
-
-function DistanceBetween(v1, v2) {
-    return Math.sqrt(((v2.x - v1.x) * (v2.x - v1.x)) + ((v2.y - v1.y) * (v2.y - v1.y)) + ((v2.z - v1.z) * (v2.z - v1.z)));
 }

@@ -33,18 +33,18 @@ let models = [
 ]
 
 let movable = [ 
-    {'model': 'models/gltf/Crab.glb',		'type': kCrab},
-    {'model': 'models/gltf/Dolphin.glb',	'type': kDolphin},
-    {'model': 'models/gltf/Eel.glb',		'type': kEel},
-    {'model': 'models/gltf/Hammerhead.glb', 'type': kHammerhead},
-    {'model': 'models/gltf/Lobster.glb',	'type': kLobster},
-    {'model': 'models/gltf/Octopus.glb',	'type': kOctopus},
-    {'model': 'models/gltf/Seal.glb',		'type': kSeal},
-    {'model': 'models/gltf/Shark.glb',		'type': kShark},
-    {'model': 'models/gltf/Squid.glb',		'type': kSquid},
-    {'model': 'models/gltf/StingRay.glb',	'type': kStingray},
-    {'model': 'models/gltf/Turtle.glb',		'type': kTurtle},
-    {'model': 'models/gltf/Whale.glb',		'type': kWhale},
+    //{'model': 'models/gltf/Crab.glb',		'type': kCrab},
+    //{'model': 'models/gltf/Dolphin.glb',	'type': kDolphin},
+    //{'model': 'models/gltf/Eel.glb',		'type': kEel},
+    //{'model': 'models/gltf/Hammerhead.glb', 'type': kHammerhead},
+    //{'model': 'models/gltf/Lobster.glb',	'type': kLobster},
+    //{'model': 'models/gltf/Octopus.glb',	'type': kOctopus},
+    //{'model': 'models/gltf/Seal.glb',		'type': kSeal},
+    //{'model': 'models/gltf/Shark.glb',		'type': kShark},
+    //{'model': 'models/gltf/Squid.glb',		'type': kSquid},
+    //{'model': 'models/gltf/StingRay.glb',	'type': kStingray},
+    //{'model': 'models/gltf/Turtle.glb',		'type': kTurtle},
+    //{'model': 'models/gltf/Whale.glb',		'type': kWhale},
     {'model': 'models/gltf/BrownFish.glb',	'type': kFish},
     {'model': 'models/gltf/Dory.glb',		'type': kFish},
     {'model': 'models/gltf/Tuna.glb',		'type': kFish},
@@ -52,8 +52,8 @@ let movable = [
 ]
 
 const upNormal = new THREE.Vector3(0, 1, 0);
-const kDeepWater = Utils.RGB(177, 176, 140);
-const kShallowWater = Utils.RGB(232, 227, 174);
+const kDeepWater = A4.RGB(177, 176, 140);
+const kShallowWater = A4.RGB(232, 227, 174);
 const kV3Down = new THREE.Vector3(0,-1,0);
 
 var v;
@@ -109,7 +109,7 @@ function LoadModels() {
     for (let i = 0; i < v.length; i+=3) {
         
 
-        if (Math.random() < .023) {
+        if (Math.random() < .046) {
             var ray = new THREE.Raycaster(new THREE.Vector3(v[i], v[i+1] + 5, v[i+2]), kV3Down, 0, 5);
             var intersects = ray.intersectObject(Perlin_Mesh);
             if (intersects.length > 0) {
@@ -129,31 +129,31 @@ function LoadModels() {
             }
         }
 
-        // if (Math.random() < .0023) {
-        //     var ray = new THREE.Raycaster(new THREE.Vector3(v[i], v[i+1] + 5, v[i+2]), kV3Down, 0, 5);
-        //     var intersects = ray.intersectObject(Perlin_Mesh);
-        //     if (intersects.length > 0) {
-        //         var face = intersects[0].face;
-        //         if (face === null) { continue; }    //  Pass if there is no terrain underneath.
+        if (Math.random() < .0023) {
+            var ray = new THREE.Raycaster(new THREE.Vector3(v[i], v[i+1] + 5, v[i+2]), kV3Down, 0, 5);
+            var intersects = ray.intersectObject(Perlin_Mesh);
+            if (intersects.length > 0) {
+                var face = intersects[0].face;
+                if (face === null) { continue; }    //  Pass if there is no terrain underneath.
 
-        //         var normal = face.normal;
-        //         if (normal !== null) {
-        //             if(modelIndex >= models.length){
-        //                 modelIndex = 0;
-        //             }
-        //             loadGLTF(models[modelIndex]['model'], v[i+1], v[i+2], v[i], normal, models[modelIndex]['type'], false);
-        //             modelIndex++;
+                var normal = face.normal;
+                if (normal !== null) {
+                    if(modelIndex >= models.length){
+                        modelIndex = 0;
+                    }
+                    loadGLTF(models[modelIndex]['model'], v[i+1], v[i+2], v[i], normal, models[modelIndex]['type'], false);
+                    modelIndex++;
 
-        //             continue;
-        //         }
-        //     }
-        // }
+                    continue;
+                }
+            }
+        }
 
         if (Math.random() < .0069) {
             if(moveIndex >= movable.length){
                 moveIndex = 0;
             }
-            loadGLTF(movable[moveIndex]['model'], v[i+1], Utils.random(v[i+2] + 50, v[i+2] + 150), v[i], V3Zero, movable[moveIndex]['type'], true);
+            loadGLTF(movable[moveIndex]['model'], v[i+1], A4.random(v[i+2] + 50, v[i+2] + 150), v[i], V3Zero, movable[moveIndex]['type'], true);
             moveIndex++;
         }
     }
