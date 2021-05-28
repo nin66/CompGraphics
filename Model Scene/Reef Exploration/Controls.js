@@ -63,10 +63,10 @@ function UpdateControls() {
         prevInclination = inclination;
 
         //  Azimuth
-        RotateRelativeTo(camera, new THREE.Vector3(0,1,0), -0.002 * deltaAzimuth)
+        RotateRelativeTo(camera, V3Up, -0.002 * deltaAzimuth)
 
         //  Inclination
-        camera.rotateOnAxis (new THREE.Vector3(1,0,0), -0.002 * deltaInclination);
+        camera.rotateOnAxis (V3Right, -0.002 * deltaInclination);
     }
 
     UpdateCameraQuaternion();
@@ -116,19 +116,19 @@ function UpdateCameraVector3(){
 //  Update camera angle using Quaternion.
 function UpdateCameraQuaternion(){
     if (ASCIIKeyCode[38]) {  //  Up
-        camera.rotateOnAxis (new THREE.Vector3(1,0,0), 0.015);
+        camera.rotateOnAxis (V3Right, 0.015);
     }
 
     if (ASCIIKeyCode[37]) {  //  Left
-        RotateRelativeTo(camera, new THREE.Vector3(0,1,0), 0.015)
+        RotateRelativeTo(camera, V3Up, 0.015)
     }
 
     if (ASCIIKeyCode[40]) {  //  Down
-        camera.rotateOnAxis (new THREE.Vector3(1,0,0), -0.015);
+        camera.rotateOnAxis (V3Right, -0.015);
     }
 
     if (ASCIIKeyCode[39]) {  //  Right
-        RotateRelativeTo(camera, new THREE.Vector3(0,1,0), -0.015)
+        RotateRelativeTo(camera, V3Up, -0.015)
     }
 }
 

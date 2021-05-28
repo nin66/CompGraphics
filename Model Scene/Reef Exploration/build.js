@@ -17,8 +17,6 @@ var bCalculatedPath = false;
 const qXLimit = 25;
 const qYLimit = 359;
 
-var V3Zero = new THREE.Vector3(0, 0, 0);
-
 const kRocks = 'Rocks';             //  Standardised and consistent spelling of objects/models.
 const kCoral = 'Coral';             //  This is so that there is no confusion or errors based on
 const kFish = 'Fish';               //  the spelling of models.

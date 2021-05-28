@@ -7,7 +7,7 @@ function animate() {
     time += delta;
 
     bubbleParticles.forEach(b => { //bubble animation (spins around z axis)
-        b.position.addScaledVector(direction, speed * delta);
+        b.position.addScaledVector(V3Up, speed * delta);
         b.position.y+=.07;
         b.rotation.z-=.02;
         if (b.position.y >= 800) {
@@ -118,11 +118,10 @@ function onDocumentMouseDown(event) {
 var fPointLightTime = 0;
 var fTimeOfDaySpeed = .01;
 
-const v3Right = new THREE.Vector3(1, 0, 0);
 var vTo = new THREE.Vector3();              //  For some reason, THREE.js doesn't like setting a Vector3
-vTo.x = v3Right.x;                          //  like var v3 = v.position; so it is done like this.
-vTo.y = v3Right.y;                          //  It looks horrendous, but stick with it.
-vTo.z = v3Right.z;                          //  
+vTo.x = V3Right.x;                          //  like var v3 = v.position; so it is done like this.
+vTo.y = V3Right.y;                          //  It looks horrendous, but stick with it.
+vTo.z = V3Right.z;                          //  
 
 const au = 1536;    //  Distance between the sun and the terrain; astronomical unit.
 const solstice = new THREE.Color(0xFFFFFF);     //  Solstice colour: When the sun is directly above the terrain.
@@ -191,5 +190,3 @@ function PerformFishyMovement() {
         }
     }
 }
-
-const V3Forward = new THREE.Vector3(0, 0, 1);

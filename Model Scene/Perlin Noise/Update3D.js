@@ -54,7 +54,6 @@ let movable = [
 const upNormal = new THREE.Vector3(0, 1, 0);
 const kDeepWater = A4.RGB(177, 176, 140);
 const kShallowWater = A4.RGB(232, 227, 174);
-const kV3Down = new THREE.Vector3(0,-1,0);
 
 var v;
 
@@ -110,7 +109,7 @@ function LoadModels() {
         
 
         if (Math.random() < .046) {
-            var ray = new THREE.Raycaster(new THREE.Vector3(v[i], v[i+1] + 5, v[i+2]), kV3Down, 0, 5);
+            var ray = new THREE.Raycaster(new THREE.Vector3(v[i], v[i+1] + 5, v[i+2]), V3Down, 0, 5);
             var intersects = ray.intersectObject(Perlin_Mesh);
             if (intersects.length > 0) {
                 var face = intersects[0].face;
@@ -130,7 +129,7 @@ function LoadModels() {
         }
 
         if (Math.random() < .023) {
-            var ray = new THREE.Raycaster(new THREE.Vector3(v[i], v[i+1] + 5, v[i+2]), kV3Down, 0, 5);
+            var ray = new THREE.Raycaster(new THREE.Vector3(v[i], v[i+1] + 5, v[i+2]), V3Down, 0, 5);
             var intersects = ray.intersectObject(Perlin_Mesh);
             if (intersects.length > 0) {
                 var face = intersects[0].face;
