@@ -19,8 +19,17 @@ function animate() {
     mixer.forEach(function (call){
         call.update(delta);
     });
-    
-	PerformMovement();
+
+    moveableModels.forEach(function(m){
+        m.translateZ(kMoveSpeed * delta);
+
+        if (Math.abs(m.position.x) > hWidth || m.position.y > 200 || m.position.y < 0 || Math.abs(m.position.z) > hHeight) {
+            var r = A4.random3(-hWidth, hWidth, 50, heightMultiplier, -hHeight, height);
+            m.position.set(r.x, r.y, r.z);
+        }
+    });
+
+	PerformFishyMovement();
 
     ComputeDaylightColour(delta);
 
@@ -142,7 +151,7 @@ function ComputeDaylightColour(fDelta) {
 const kMoveSpeed = 7.5;
 let facing = [];
 
-function PerformMovement() {
+function PerformFishyMovement() {
     if (bInitialised && seeker.length > 0) {
 		
         bCalculatedPath = true;
@@ -182,3 +191,5 @@ function PerformMovement() {
         }
     }
 }
+
+const V3Forward = new THREE.Vector3(0, 0, 1);
