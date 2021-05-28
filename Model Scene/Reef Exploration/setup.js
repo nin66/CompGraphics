@@ -11,8 +11,13 @@ var gui;
 var dragControls;
 var time = 0;
 var delta = 0;
-var direction = new THREE.Vector3(0, 1, 0);
 var speed = 1.3; // units a second
+
+const V3Zero = new THREE.Vector3(0, 0, 0);
+const V3Up = new THREE.Vector3(0, 1, 0);
+const V3Down = new THREE.Vector3(0, -1, 0);
+const V3Right = new THREE.Vector3(1, 0, 0);
+const V3Forward = new THREE.Vector3(0, 0, 1);
 
 const loadingManager = new THREE.LoadingManager(() => {
 

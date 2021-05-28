@@ -4,16 +4,29 @@
 
 class A4 {
 
-    static Deg2Rad() {
-        return Math.PI * 2.0 / 360.0;
-    }
+    static kEpsilon = 0.00001;
 
-    static Rad2Deg() {
-        return 1.0 / Deg2Rad();
-    }
+    static Deg2Rad = Math.PI * 2.0 / 360.0;
 
     static random(min, max) {
         return Math.random() * (max - min) + min;
+    }
+
+    /**
+     * @param { Number } x1 X-Axis Lower Limit
+     * @param { Number } x2 X-Axis Upper Limit
+     * @param { Number } y1 Y-Axis Lower Limit
+     * @param { Number } y2 Y-Axis Upper Limit
+     * @param { Number } z1 Z-Axis Lower Limit
+     * @param { Number } z2 Z-Axis Upper Limit
+     * @returns A random Vector3 point between x1-x2, y1-y2, z1-z2
+     */
+    static random3(x1, x2, y1, y2, z1, z2) {
+        var x = A4.random(x1, x2);
+        var y = A4.random(y1, y2);
+        var z = A4.random(z1, z2);
+
+        return new THREE.Vector3(x, y, z);
     }
 
     static addPlane(kPoints, x, y, z) {
@@ -76,7 +89,7 @@ class A4 {
         if (mag > kEpsilon)
             return value / mag;
         else
-            return zero;
+            return new THREE.Vector3(0, 0, 0);
     }
 
     static Dot (lhs, rhs) {

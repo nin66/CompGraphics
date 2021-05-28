@@ -74,7 +74,8 @@
 
 				} else {
 
-					console.error( e );
+					window.location.reload();
+					// console.error( e );
 
 				}
 

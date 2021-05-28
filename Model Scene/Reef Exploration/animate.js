@@ -7,7 +7,7 @@ function animate() {
     time += delta;
 
     bubbleParticles.forEach(b => { //bubble animation (spins around z axis)
-        b.position.addScaledVector(direction, speed * delta);
+        b.position.addScaledVector(V3Up, speed * delta);
         b.rotation.z-=.02;
         if (b.position.y >= 100) { //respawn height
             b.position.y = 10; 
@@ -18,8 +18,17 @@ function animate() {
     mixer.forEach(function (call){
         call.update(delta);
     });
-    
-	PerformMovement();
+
+    moveableModels.forEach(function(m){
+        m.translateZ(kMoveSpeed * delta);
+
+        if (Math.abs(m.position.x) > hWidth || m.position.y > 200 || m.position.y < 0 || Math.abs(m.position.z) > hHeight) {
+            var r = A4.random3(-hWidth, hWidth, 50, heightMultiplier, -hHeight, height);
+            m.position.set(r.x, r.y, r.z);
+        }
+    });
+
+	PerformFishyMovement();
 
     ComputeDaylightColour(delta);
 
@@ -108,11 +117,10 @@ function onDocumentMouseDown(event) {
 var fPointLightTime = 0;
 var fTimeOfDaySpeed = .01;
 
-const v3Right = new THREE.Vector3(1, 0, 0);
 var vTo = new THREE.Vector3();              //  For some reason, THREE.js doesn't like setting a Vector3
-vTo.x = v3Right.x;                          //  like var v3 = v.position; so it is done like this.
-vTo.y = v3Right.y;                          //  It looks horrendous, but stick with it.
-vTo.z = v3Right.z;                          //  
+vTo.x = V3Right.x;                          //  like var v3 = v.position; so it is done like this.
+vTo.y = V3Right.y;                          //  It looks horrendous, but stick with it.
+vTo.z = V3Right.z;                          //  
 
 const au = 1536;    //  Distance between the sun and the terrain; astronomical unit.
 const solstice = new THREE.Color(0xFFFFFF);     //  Solstice colour: When the sun is directly above the terrain.
@@ -132,21 +140,22 @@ function ComputeDaylightColour(fDelta) {
     vFrom.normalize();
     vTo.normalize();
 
-    var dot = (vFrom.x * vTo.x) + (vFrom.y * vTo.y) + (vFrom.z * vTo.z);    //  THREE.js' dot product function is wrong,
-                                                                            //  so this needs to be done.
+    var dot = A4.Dot(vFrom, vTo);
+    
     colour.lerpColors(solstice, sunsetrise, Math.abs(dot));
     pointLight.color = colour;
 }
 
 const kMoveSpeed = 7.5;
+let facing = [];
 
-function PerformMovement() {
+function PerformFishyMovement() {
     if (bInitialised && seeker.length > 0) {
 		
         bCalculatedPath = true;
         
 		for (let i = 0; i < seeker.length; ++i) {
-            if (DistanceBetween(seeker[i].position, seekerTarget[i].position) > 5) {
+            if (A4.Distance(seeker[i].position, seekerTarget[i].position) > 5) {
                 var vFrom = new THREE.Vector3();
                 vFrom.x = seeker[i].position.x;
                 vFrom.y = seeker[i].position.y;
@@ -167,7 +176,15 @@ function PerformMovement() {
                 seeker[i].position.y += vTargetPosition.y * kMoveSpeed * delta;
                 seeker[i].position.z += vTargetPosition.z * kMoveSpeed * delta;
 
-                seeker[i].lookAt(seekerTarget[i].position);
+                if (!facing.includes(i)) {
+                    facing.push(i);
+                    seeker[i].lookAt(seekerTarget[i].position);
+                }
+
+            } else {
+                //  On Target Reached.
+                seeker.splice(i, 1);
+                seekerTarget.splice(i, 1);
             }
         }
     }

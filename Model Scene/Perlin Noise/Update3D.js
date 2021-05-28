@@ -33,18 +33,18 @@ let models = [
 ]
 
 let movable = [ 
-    //{'model': 'models/gltf/Crab.glb',		'type': kCrab},
-    //{'model': 'models/gltf/Dolphin.glb',	'type': kDolphin},
-    //{'model': 'models/gltf/Eel.glb',		'type': kEel},
-    //{'model': 'models/gltf/Hammerhead.glb', 'type': kHammerhead},
-    //{'model': 'models/gltf/Lobster.glb',	'type': kLobster},
-    //{'model': 'models/gltf/Octopus.glb',	'type': kOctopus},
-    //{'model': 'models/gltf/Seal.glb',		'type': kSeal},
-    //{'model': 'models/gltf/Shark.glb',		'type': kShark},
-    //{'model': 'models/gltf/Squid.glb',		'type': kSquid},
-    //{'model': 'models/gltf/StingRay.glb',	'type': kStingray},
-    //{'model': 'models/gltf/Turtle.glb',		'type': kTurtle},
-    //{'model': 'models/gltf/Whale.glb',		'type': kWhale},
+    {'model': 'models/gltf/Crab.glb',		'type': kCrab},
+    {'model': 'models/gltf/Dolphin.glb',	'type': kDolphin},
+    {'model': 'models/gltf/Eel.glb',		'type': kEel},
+    {'model': 'models/gltf/Hammerhead.glb', 'type': kHammerhead},
+    {'model': 'models/gltf/Lobster.glb',	'type': kLobster},
+    {'model': 'models/gltf/Octopus.glb',	'type': kOctopus},
+    {'model': 'models/gltf/Seal.glb',		'type': kSeal},
+    {'model': 'models/gltf/Shark.glb',		'type': kShark},
+    {'model': 'models/gltf/Squid.glb',		'type': kSquid},
+    {'model': 'models/gltf/StingRay.glb',	'type': kStingray},
+    {'model': 'models/gltf/Turtle.glb',		'type': kTurtle},
+    {'model': 'models/gltf/Whale.glb',		'type': kWhale},
     {'model': 'models/gltf/BrownFish.glb',	'type': kFish},
     {'model': 'models/gltf/Dory.glb',		'type': kFish},
     {'model': 'models/gltf/Tuna.glb',		'type': kFish},
@@ -54,7 +54,6 @@ let movable = [
 const upNormal = new THREE.Vector3(0, 1, 0);
 const kDeepWater = A4.RGB(177, 176, 140);
 const kShallowWater = A4.RGB(232, 227, 174);
-const kV3Down = new THREE.Vector3(0,-1,0);
 
 var v;
 
@@ -110,7 +109,7 @@ function LoadModels() {
         
 
         if (Math.random() < .046) {
-            var ray = new THREE.Raycaster(new THREE.Vector3(v[i], v[i+1] + 5, v[i+2]), kV3Down, 0, 5);
+            var ray = new THREE.Raycaster(new THREE.Vector3(v[i], v[i+1] + 5, v[i+2]), V3Down, 0, 5);
             var intersects = ray.intersectObject(Perlin_Mesh);
             if (intersects.length > 0) {
                 var face = intersects[0].face;
@@ -129,8 +128,8 @@ function LoadModels() {
             }
         }
 
-        if (Math.random() < .0023) {
-            var ray = new THREE.Raycaster(new THREE.Vector3(v[i], v[i+1] + 5, v[i+2]), kV3Down, 0, 5);
+        if (Math.random() < .023) {
+            var ray = new THREE.Raycaster(new THREE.Vector3(v[i], v[i+1] + 5, v[i+2]), V3Down, 0, 5);
             var intersects = ray.intersectObject(Perlin_Mesh);
             if (intersects.length > 0) {
                 var face = intersects[0].face;

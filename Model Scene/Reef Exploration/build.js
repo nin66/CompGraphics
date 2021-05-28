@@ -14,7 +14,8 @@ var seekerTarget = [];
 var bInitialised = false;
 var bCalculatedPath = false;
 
-var V3Zero = new THREE.Vector3(0, 0, 0);
+const qXLimit = 25;
+const qYLimit = 359;
 
 const kRocks = 'Rocks';             //  Standardised and consistent spelling of objects/models.
 const kCoral = 'Coral';             //  This is so that there is no confusion or errors based on
@@ -73,6 +74,12 @@ function loadGLTF(url, x, y, z, normal, name, bMoveable) {
             CalculatePathfinding(gltf.scene);
 			fishies.push(gltf.scene);
         } else if (bMoveable) {
+            var randomXRot = A4.random(0, qXLimit);
+            var randomYRot = A4.random(0, qYLimit);
+    
+            gltf.scene.rotation.y = randomYRot * A4.Deg2Rad;
+            gltf.scene.rotation.x = randomXRot * A4.Deg2Rad;
+
             moveableModels.push(gltf.scene);
         }
 
@@ -81,10 +88,12 @@ function loadGLTF(url, x, y, z, normal, name, bMoveable) {
         gltf.scene.position.y = y;
         gltf.scene.position.z = z;
 
-        //  Apply normals.
-        gltf.scene.rotation.x = normal.x;
-        gltf.scene.rotation.y = normal.y;
-        gltf.scene.rotation.z = 0;
+        //  Apply normals if not moveable.
+        if (!bMoveable) {
+            gltf.scene.rotation.x = normal.x;
+            gltf.scene.rotation.y = normal.y;
+            gltf.scene.rotation.z = 0;
+        }
 
         // gltf.scene.lookAt(gltf.scene.position.x + up.x, gltf.scene.position.y + up.y, gltf.scene.position.z + up.z);
         gltf.castShadow = true;
@@ -273,8 +282,4 @@ function CalculatePathfinding(model) {
 
         break;
     }
-}
-
-function DistanceBetween(v1, v2) {
-    return Math.sqrt(((v2.x - v1.x) * (v2.x - v1.x)) + ((v2.y - v1.y) * (v2.y - v1.y)) + ((v2.z - v1.z) * (v2.z - v1.z)));
 }
