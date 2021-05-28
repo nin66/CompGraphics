@@ -145,7 +145,8 @@ class Information {
         "Dolphins are very friendly to humans and other animals :)",
         "Killer Whales are actually Dolphins.",
         "Dolphins can swim up to 32 kilometres per hour.",
-        "A group of Dolphins is called a pod."
+        "A group of Dolphins is called a pod.",
+        "Dolphins has big brain."
     ]
 
     static nDolphin = 0;
@@ -185,6 +186,7 @@ class Information {
 
     static octopus = [
         "The plural of Octopus is Octopuses.",
+        "Octopus is a smart and intelligent animal.",
         "Octopuses existed 296 million years ago.",
         "Octopuses have 3 hearts.",
         "Octopus arms have a mind of their own.<br>Two-thirds of an Octopus' neurons are in its arms, not in its head.",
