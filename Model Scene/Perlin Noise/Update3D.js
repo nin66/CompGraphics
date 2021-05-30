@@ -39,7 +39,6 @@ let movable = [
     {'model': 'models/gltf/Hammerhead.glb', 'type': kHammerhead},
     {'model': 'models/gltf/Lobster.glb',	'type': kLobster},
     {'model': 'models/gltf/Octopus.glb',	'type': kOctopus},
-    {'model': 'models/gltf/Seal.glb',		'type': kSeal},
     {'model': 'models/gltf/Shark.glb',		'type': kShark},
     {'model': 'models/gltf/Squid.glb',		'type': kSquid},
     {'model': 'models/gltf/StingRay.glb',	'type': kStingray},

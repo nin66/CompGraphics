@@ -29,7 +29,6 @@ const kEel = 'Eel';                 //
 const kHammerhead = 'Hammerhead';   //
 const kLobster = 'Lobster';         //
 const kOctopus = 'Octopus';         //
-const kSeal = 'Seal';               //
 const kShark = 'Shark';             //
 const kSquid = 'Squid';             //
 const kStingray = 'Stingray';       //

@@ -200,24 +200,6 @@ class Information {
         return Information.octopus[Information.nOctopus++ % Information.octopus.length];
     }
 
-    static seal = [
-        "Seals are semi-aquatic animals.",
-        "Seals are believed to be the result of evolution from Bears or Otters.",
-        "There are around 33 species of Seals.",
-        "Seals are found in most waters of the world, but mainly in Arctic and Antarctic areas.",
-        "Seals have a layer of fat under their skin called 'Blubber', which keeps them warm in cold waters.",
-        "Seals live, on average 25-30 years. Females live longer than males.",
-        "Some species of Seal can hold their breath for 2 hours by lowering their heart rate.",
-        "A group of Seals is called a harem, rookery, or bob.",
-        "Seals are protected under international law.<br>Seals have the longest history in legal regulation, longer than Whales."
-    ]
-
-    static nSeal = 0;
-
-    static Seal() {
-        return Information.seal[Information.nSeal++ % Information.seal.length];
-    }
-
     static shark = [
         "Sharks have electroreceptor organs, making them able to sense electromagnetic fields.",
         "Shark fossils found in Australia date back 455 million years.",
