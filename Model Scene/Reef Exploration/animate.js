@@ -88,9 +88,6 @@ function onDocumentMouseDown(event) {
                 case kOctopus:
                     document.getElementById('modelinfo').innerHTML = Information.Octopus();
                     break;
-                case kSeal:
-                    document.getElementById('modelinfo').innerHTML = Information.Seal();
-                    break;
                 case kShark:
                     document.getElementById('modelinfo').innerHTML = Information.Shark();
                     break;
