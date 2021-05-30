@@ -32,7 +32,7 @@ let models = [
     {'model': 'models/gltf/StarFish.glb',	'type': kStarFish}
 ]
 
-let movable = [ 
+let movable = [
     {'model': 'models/gltf/Crab.glb',		'type': kCrab},
     {'model': 'models/gltf/Dolphin.glb',	'type': kDolphin},
     {'model': 'models/gltf/Eel.glb',		'type': kEel},
@@ -56,30 +56,20 @@ const kShallowWater = A4.RGB(232, 227, 174);
 
 var v;
 
-//  Updates the plane's attributes.
 function UpdatePlane() {
-    //  Converts the positions of the vertices that make up the plane into an array.
-    //  Later used for modifying the Z-Axis points with Perlin noise.
     v = Perlin_Mesh.geometry.attributes.position.array;
     const colours = [];
 
     for(var i = 0; i <= v.length; i += 3) {
-        //  X = v[i].
-        //  Y = v[i+1].
-        //  Z = v[i+2].
-        //  Modify the Z-Axis of this vertex to push it upwards by perlin noise and height multiplier.
-        //  This modification is based on the X and Y positions of the plane in world space.
         var x = v[i] / scale;
         var y = v[i+1] / scale;
         var Perlin = Noise.PerlinNoise(x, y);
 
-        //  Plane colours and heights according to their Perlin noise value.
-        v[i+2] = Function(Perlin) * heightMultiplier;   //  This noise function returns a smoothed value
-                                                        //  between -1 and 1.
-                                                        //  Use Perlin Noise to generate heights and colours.
+        v[i+2] = Function(Perlin) * heightMultiplier;
+
         if (Perlin < 0) {
             var colour = new THREE.Color();
-            colour.lerpColors(kShallowWater, kDeepWater, Math.abs(Perlin));     //  Interpolate colour based on Perlin Noise.
+            colour.lerpColors(kShallowWater, kDeepWater, Math.abs(Perlin));
             colours.push(colour.r, colour.g, colour.b);
         } else if (Perlin >= 0) {
 			colours.push(kShallowWater.r, kShallowWater.g, kShallowWater.b);
@@ -94,12 +84,6 @@ function UpdatePlane() {
     PerlinGeometry.setAttribute('color', new THREE.BufferAttribute(new Float32Array(colours), 3));
 
     LoadModels();
-    
-    var uvs = tl.load('Perlin Noise/normals.png', function() {
-        Perlin_Mesh.material.normalMap = uvs;
-        Perlin_Mesh.material.normalMap.wrapS = Perlin_Mesh.material.normalMap.wrapT = THREE.RepeatWrapping;
-        Perlin_Mesh.material.needsUpdate = true;
-    });
 
     bInitialised = true;
 }
@@ -111,7 +95,7 @@ function Function(f) {
 
 function LoadModels() {
     for (let i = 0; i < v.length; i+=3) {
-        
+
 
         if (Math.random() < .046) {
             var ray = new THREE.Raycaster(new THREE.Vector3(v[i], v[i+1] + 5, v[i+2]), V3Down, 0, 5);
