@@ -173,7 +173,7 @@ function PerformFishyMovement() {
                 seeker[i].position.y += vTargetPosition.y * kMoveSpeed * delta;
                 seeker[i].position.z += vTargetPosition.z * kMoveSpeed * delta;
 
-                if (!facing.includes(i)) {
+                if (!facing.includes(i) || facing.length == 0) {
                     facing.push(i);
                     seeker[i].lookAt(seekerTarget[i].position);
                 }
