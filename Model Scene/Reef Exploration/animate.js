@@ -4,7 +4,6 @@ function animate() {
     
     /** Delta time */
     delta = clock.getDelta();
-    time += delta;
 
     bubbleParticles.forEach(b => { //bubble animation (spins around z axis)
         b.position.addScaledVector(V3Up, speed * delta);

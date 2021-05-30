@@ -9,7 +9,6 @@ var clock;
 var flashlight;
 var gui;
 var dragControls;
-var time = 0;
 var delta = 0;
 var speed = 1.3; // units a second
 var tl = new THREE.TextureLoader();
