@@ -1,5 +1,5 @@
 /* 
-    Authors     : Group 87 Autumn 2021 INTRODUCTION TO COMPUTER GRAPHICS
+    Authors     : Group 18 Autumn 2021 INTRODUCTION TO COMPUTER GRAPHICS
 */
 
 canvas {
@@ -40,6 +40,7 @@ h1 {
     bottom : 10%;
     width : 100%;
     text-align : center;
+    text-shadow: 1px 0 0 rgb(10, 32, 61), 0 -1px 0 #133953, 0 1px 0 #133953, -1px 0 0 #133953;
     font-size : 50px;
 }
 
@@ -79,6 +80,7 @@ h1 {
     text-align : center;
     top : 85%;
     bottom : 5%;
+    text-shadow: 1px 0 0 rgb(10, 32, 61), 0 -1px 0 #133953, 0 1px 0 #133953, -1px 0 0 #133953;
     color : white;
 }
 
