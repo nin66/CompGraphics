@@ -120,7 +120,7 @@ vTo.y = V3Right.y;                          //  It looks horrendous, but stick w
 vTo.z = V3Right.z;                          //  
 
 const au = 1536;    //  Distance between the sun and the terrain; astronomical unit.
-const solstice = new THREE.Color(0xFFFFFF);     //  Solstice colour: When the sun is directly above the terrain.
+const solstice = new THREE.Color(0xDDDDFF);     //  Solstice colour: When the sun is directly above the terrain.
 const sunsetrise = new THREE.Color(0xFF8C00);   //  sunsetrise colour: When the sun's light is interrupted by the atmosphere.
 var colour = new THREE.Color();
 

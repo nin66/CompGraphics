@@ -94,6 +94,12 @@ function UpdatePlane() {
     PerlinGeometry.setAttribute('color', new THREE.BufferAttribute(new Float32Array(colours), 3));
 
     LoadModels();
+    
+    var uvs = tl.load('Perlin Noise/normals.png', function() {
+        Perlin_Mesh.material.normalMap = uvs;
+        Perlin_Mesh.material.normalMap.wrapS = Perlin_Mesh.material.normalMap.wrapT = THREE.RepeatWrapping;
+        Perlin_Mesh.material.needsUpdate = true;
+    });
 
     bInitialised = true;
 }

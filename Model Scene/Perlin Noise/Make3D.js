@@ -17,7 +17,7 @@ function MakePlane(){
     
     Perlin_Mesh.castShadow = true;
     Perlin_Mesh.receiveShadow = true;
-    
+
     PerlinGeometry.computeVertexNormals();
     scene.add(Perlin_Mesh);
 }
