@@ -73,7 +73,7 @@ function loadGLTF(url, x, y, z, normal, name, bMoveable) {
             CalculatePathfinding(gltf.scene);
 			fishies.push(gltf.scene);
         } else if (bMoveable) {
-            var randomXRot = A4.random(0, qXLimit);
+            var randomXRot = A4.random(-5, -qXLimit);
             var randomYRot = A4.random(0, qYLimit);
     
             gltf.scene.rotation.y = randomYRot * A4.Deg2Rad;
