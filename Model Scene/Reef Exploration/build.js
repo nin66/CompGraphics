@@ -298,8 +298,6 @@ function SpawnNewFishies() {
 		for (let k = 0; k < fish; ++k) {
 			var r = A4.random3(aToSpawn[i].position.x - 1, aToSpawn[i].position.x + 1, aToSpawn[i].position.y - 1, aToSpawn[i].position.y + 1, aToSpawn[i].position.z - 1, aToSpawn[i].position.z + 1);
 			loadGLTF(aFishModels[k], r.x, r.y, r.z, V3Zero, kFish, true);
-
-			console.log('spawned');
 		}
 	}
 
