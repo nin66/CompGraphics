@@ -249,35 +249,16 @@ function CalculatePathfinding(model) {
 
     for (let i = 0; i < coralModels.length; ++i) {
 
-		if (occupiedCorals.includes(i)) {
-			continue;
-		}
-
-        /**
-         * The below commented-out code is an attempt at forward-future collision *AVOIDANCE*
-         * and *NOT* detection.
-         *
-         * Feel free to modify, to fix it. Right now, fishies can go through the terrain.
-         *
-         * Uncommenting this consumes more processing power (it takes >minute to load on my computer).
-         */
-        // var vDir = new THREE.Vector3();                              //  Get a normalised direction relative to
-        // vDir.x = coralModels[i].position.x - model.position.x;       //  model and the target coral.
-        // vDir.y = coralModels[i].position.y - model.position.y;       //  v1 : direction relative to, v2 : target
-        // vDir.z = coralModels[i].position.z - model.position.z;       //  d = v2 - v1
-        // vDir.normalize();                                            //  d^ = d / |d|
-
-        // var ray = new THREE.Raycaster(model.position, vDir, kMinimumThreshold, kMaximumThreshold);
-        // var intersects = ray.intersectObject(Perlin_Mesh);   //  The raycast will only hit the terrain.
-
-        // if (intersects.length > 0) {     //  If raycast hit = true,
-        //     continue;                    //  We know that the fishy will go through the terrain.
-        // }
+	if (occupiedCorals.includes(i)) {
+		continue;
+	}
 
         seeker.push(model);
         seekerTarget.push(coralModels[i]);
 
-		occupiedCorals.push(i);
+	occupiedCorals.push(i);
+
+	model.lookAt(coralModels[i].position);
 
         break;
     }

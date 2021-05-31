@@ -148,7 +148,6 @@ function ComputeDaylightColour(fDelta) {
 }
 
 const kMoveSpeed = 7.5;
-let facing = [];
 
 function PerformFishyMovement() {
     if (bInitialised && seeker.length > 0) {
@@ -177,10 +176,7 @@ function PerformFishyMovement() {
                 seeker[i].position.y += vTargetPosition.y * kMoveSpeed * delta;
                 seeker[i].position.z += vTargetPosition.z * kMoveSpeed * delta;
 
-                if (!facing.includes(i) || facing.length == 0) {
-                    facing.push(i);
-                    seeker[i].lookAt(seekerTarget[i].position);
-                }
+		seeker[i].lookAt(seekerTarget[i].position);
 
             } else {
                 //  On Target Reached.
