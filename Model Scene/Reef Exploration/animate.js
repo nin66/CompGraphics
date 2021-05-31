@@ -1,7 +1,7 @@
 
 
 function animate() {
-    
+
     /** Delta time */
     delta = clock.getDelta();
 
@@ -9,7 +9,7 @@ function animate() {
         b.position.addScaledVector(V3Up, speed * delta);
         b.rotation.z-=.02;
         if (b.position.y >= 100) { //respawn height
-            b.position.y = 10; 
+            b.position.y = 10;
         } else {
         }
     });
@@ -116,30 +116,35 @@ var fTimeOfDaySpeed = .01;
 var vTo = new THREE.Vector3();              //  For some reason, THREE.js doesn't like setting a Vector3
 vTo.x = V3Right.x;                          //  like var v3 = v.position; so it is done like this.
 vTo.y = V3Right.y;                          //  It looks horrendous, but stick with it.
-vTo.z = V3Right.z;                          //  
+vTo.z = V3Right.z;                          //
 
 const au = 1536;    //  Distance between the sun and the terrain; astronomical unit.
 const solstice = new THREE.Color(0xDDDDFF);     //  Solstice colour: When the sun is directly above the terrain.
 const sunsetrise = new THREE.Color(0xFF8C00);   //  sunsetrise colour: When the sun's light is interrupted by the atmosphere.
 var colour = new THREE.Color();
+var bSpawned = false;
 
 function ComputeDaylightColour(fDelta) {
-    fPointLightTime += fDelta * fTimeOfDaySpeed;
-    pointLight.position.y = au * Math.sin(fPointLightTime);
-    pointLight.position.x = au * Math.cos(fPointLightTime);
+	fPointLightTime += fDelta * fTimeOfDaySpeed;
+	pointLight.position.y = au * Math.sin(fPointLightTime);
+	pointLight.position.x = au * Math.cos(fPointLightTime);
 
-    var vFrom = new THREE.Vector3();        //  
-    vFrom.x = pointLight.position.x;        //  
-    vFrom.y = pointLight.position.y;        //  
-    vFrom.z = pointLight.position.z;        //
+	var vFrom = new THREE.Vector3();        //
+	vFrom.x = pointLight.position.x;        //
+	vFrom.y = pointLight.position.y;        //
+	vFrom.z = pointLight.position.z;        //
 
-    vFrom.normalize();
-    vTo.normalize();
+	vFrom.normalize();
+	vTo.normalize();
 
-    var dot = A4.Dot(vFrom, vTo);
-    
-    colour.lerpColors(solstice, sunsetrise, Math.abs(dot));
-    pointLight.color = colour;
+	var dot = A4.Dot(vFrom, vTo);
+
+	if (!bSpawned && aToSpawn.length > 0) {
+		SpawnNewFishies();
+	}
+
+	colour.lerpColors(solstice, sunsetrise, Math.abs(dot));
+	pointLight.color = colour;
 }
 
 const kMoveSpeed = 7.5;
@@ -147,9 +152,9 @@ let facing = [];
 
 function PerformFishyMovement() {
     if (bInitialised && seeker.length > 0) {
-		
+
         bCalculatedPath = true;
-        
+
 		for (let i = 0; i < seeker.length; ++i) {
             if (A4.Distance(seeker[i].position, seekerTarget[i].position) > 5) {
                 var vFrom = new THREE.Vector3();
@@ -179,8 +184,11 @@ function PerformFishyMovement() {
 
             } else {
                 //  On Target Reached.
+		aToSpawn.push(seeker[i]);
+
                 seeker.splice(i, 1);
                 seekerTarget.splice(i, 1);
+
             }
         }
     }

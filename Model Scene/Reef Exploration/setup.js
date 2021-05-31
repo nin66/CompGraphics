@@ -11,7 +11,6 @@ var gui;
 var dragControls;
 var delta = 0;
 var speed = 1.3; // units a second
-var tl = new THREE.TextureLoader();
 
 const V3Zero = new THREE.Vector3(0, 0, 0);
 const V3Up = new THREE.Vector3(0, 1, 0);
@@ -19,14 +18,17 @@ const V3Down = new THREE.Vector3(0, -1, 0);
 const V3Right = new THREE.Vector3(1, 0, 0);
 const V3Forward = new THREE.Vector3(0, 0, 1);
 
+var bRemoved = false;
+
 const loadingManager = new THREE.LoadingManager(() => {
 
-    const loadingScreen = document.getElementById('loading-screen'); //call css design style
-    loadingScreen.classList.add('fade-out');
+	if (!bRemoved) {
+		const loadingScreen = document.getElementById('loading-screen'); //call css design style
+		loadingScreen.classList.add('fade-out');
 
-    //remove loader from DOM via event listener
-    loadingScreen.addEventListener('transitionend', onTransitionEnd);
-
+		//remove loader from DOM via event listener
+		loadingScreen.addEventListener('transitionend', onTransitionEnd);
+	}
 });
 
 //Setup the 3 main components: scene, camera, renderer
@@ -90,5 +92,5 @@ var resizeScene = function () {
 function onTransitionEnd(event) {
 
     event.target.remove();
-
+	bRemoved = true;
 }

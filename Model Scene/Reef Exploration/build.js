@@ -75,7 +75,7 @@ function loadGLTF(url, x, y, z, normal, name, bMoveable) {
         } else if (bMoveable) {
             var randomXRot = A4.random(-5, -qXLimit);
             var randomYRot = A4.random(0, qYLimit);
-    
+
             gltf.scene.rotation.y = randomYRot * A4.Deg2Rad;
             gltf.scene.rotation.x = randomXRot * A4.Deg2Rad;
 
@@ -253,12 +253,12 @@ function CalculatePathfinding(model) {
 			continue;
 		}
 
-        /** 
+        /**
          * The below commented-out code is an attempt at forward-future collision *AVOIDANCE*
          * and *NOT* detection.
-         * 
+         *
          * Feel free to modify, to fix it. Right now, fishies can go through the terrain.
-         * 
+         *
          * Uncommenting this consumes more processing power (it takes >minute to load on my computer).
          */
         // var vDir = new THREE.Vector3();                              //  Get a normalised direction relative to
@@ -273,7 +273,7 @@ function CalculatePathfinding(model) {
         // if (intersects.length > 0) {     //  If raycast hit = true,
         //     continue;                    //  We know that the fishy will go through the terrain.
         // }
-        
+
         seeker.push(model);
         seekerTarget.push(coralModels[i]);
 
@@ -281,4 +281,27 @@ function CalculatePathfinding(model) {
 
         break;
     }
+}
+
+let aToSpawn = [];
+
+const aFishModels = [
+	'models/gltf/Marlin.glb',
+	'models/gltf/Tuna.glb',
+	'models/gltf/Dory.glb',
+	'models/gltf/BrownFish.glb'
+]
+
+function SpawnNewFishies() {
+	for (let i = 0; i < aToSpawn.length; ++i) {
+		var fish = A4.random(1, 4);
+		for (let k = 0; k < fish; ++k) {
+			var r = A4.random3(aToSpawn[i].position.x - 1, aToSpawn[i].position.x + 1, aToSpawn[i].position.y - 1, aToSpawn[i].position.y + 1, aToSpawn[i].position.z - 1, aToSpawn[i].position.z + 1);
+			loadGLTF(aFishModels[k], r.x, r.y, r.z, V3Zero, kFish, true);
+
+			console.log('spawned');
+		}
+	}
+
+	aToSpawn = [];
 }
