@@ -209,6 +209,7 @@ class Information {
         "Sharks have fantastic night vision and can see colours in the dark.",
         "When you flip a Shark upside-down, they go into a trance-like state called 'Tonic Immobility'.",
         "A group of Sharks is called a shiver.",
+        "Some sharks are partially warm-blooded."
     ]
 
     static nShark = 0;
@@ -236,6 +237,7 @@ class Information {
         "The largest species of Stringrays can measure 2 metres in length and weight about 350 kilograms.",
         "Stingrays are closely related to Sharks.",
         "Stingrays don't use their eyes to find their prey, they use their electrosensors.",
+        "Stingrays have fatal poison on their tails.",
         "A group of Stingrays is called a fever."
     ]
 
@@ -247,6 +249,7 @@ class Information {
 
     static turtle = [
         "Turtles have been around for about 120 million years.",
+        "It lives in all oceans except the Arctic Ocean.",
         "Turtles can hold their breath for 5 hours by slowing their heart rate to 1 beat per 9 minutes.",
         "The Leatherback Turtle can grow and weigh as much as 900 kilograms.",
         "Turtles tend to live around 100 years.",
